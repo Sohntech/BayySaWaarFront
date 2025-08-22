@@ -27,18 +27,18 @@ const Footer = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Newsletter Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between p-4 mb-12 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-          <div className="mb-4 md:mb-0">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-4 mb-12 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+          <div className="mb-4 md:mb-0 text-center md:text-left w-full md:w-auto">
             <h3 className="text-white font-medium">Restez informé</h3>
             <p className="text-gray-400 text-sm">Inscrivez-vous à notre newsletter</p>
           </div>
-          <form className="flex w-full md:w-auto gap-2">
+          <form className="flex flex-col md:flex-row w-full md:w-auto gap-2">
             <input
               type="email"
               placeholder="Votre email"
-              className="flex-1 md:w-64 px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-400"
+              className="w-full md:w-64 px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-400"
             />
-            <button className="px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-400 transition-colors">
+            <button className="px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-400 transition-colors w-full md:w-auto">
               S'inscrire
             </button>
           </form>
@@ -47,17 +47,17 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center space-x-3 mb-4">
+          <div className="col-span-1 md:col-span-1">
+            <div className="flex items-center justify-center sm:justify-start space-x-3 mb-4">
               <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold">B</span>
               </div>
               <div>
-                <h3 className="text-white font-bold">BAY SA WAAR</h3>
-                <p className="text-green-400 text-sm">Excellence in Commerce</p>
+                <h3 className="text-white font-bold text-center sm:text-left">BAY SA WAAR</h3>
+                <p className="text-green-400 text-sm text-center sm:text-left">Excellence in Commerce</p>
               </div>
             </div>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 justify-center sm:justify-start">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
@@ -71,7 +71,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="text-center sm:text-left">
             <h4 className="text-white font-medium mb-4">Liens Rapides</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
@@ -89,7 +89,7 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="text-center sm:text-left">
             <h4 className="text-white font-medium mb-4">Contact</h4>
             <div className="space-y-2">
               <a href="mailto:contact@baysawaar.com" className="text-gray-400 hover:text-white text-sm transition-colors flex items-center space-x-2">
@@ -105,7 +105,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-center md:text-left">
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} BAY SA WAAR
           </p>

@@ -15,7 +15,7 @@ import ScrollToTop from './components/ScrollToTop';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 font-sans">
+      <div className="min-h-screen bg-gray-50 font-sans pt-16">
         <ScrollToTop />
         <Navbar />
         <AnimatePresence mode="wait">
