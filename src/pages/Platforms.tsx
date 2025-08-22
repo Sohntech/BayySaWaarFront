@@ -179,7 +179,7 @@ const Platforms = () => {
             <p className="text-xl text-gray-600">Des outils puissants pour chaque aspect de votre entreprise</p>
           </motion.div>
 
-          <div className="space-y-16">
+          <div className="space-y-12 sm:space-y-16">
             {platforms.map((platform, index) => (
               <motion.div
                 key={platform.id}
@@ -190,20 +190,20 @@ const Platforms = () => {
                 className={`relative overflow-hidden rounded-3xl bg-gradient-to-r ${platform.color} text-white`}
               >
                 <div className="absolute inset-0 bg-black/10"></div>
-                <div className="relative p-12">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="relative p-6 sm:p-10 md:p-12">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     <div className="space-y-8">
                       <div className="flex items-center space-x-4">
-                        <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-                          <platform.icon size={32} />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+                          <platform.icon size={28} />
                         </div>
                         <div>
-                          <h3 className="text-3xl font-bold mb-2">{platform.title}</h3>
-                          <p className="text-white/80 text-lg">{platform.subtitle}</p>
+                          <h3 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">{platform.title}</h3>
+                          <p className="text-white/80 text-base sm:text-lg">{platform.subtitle}</p>
                         </div>
                       </div>
                       
-                      <p className="text-xl leading-relaxed text-white/90">
+                      <p className="text-base sm:text-lg leading-relaxed text-white/90">
                         {platform.description}
                       </p>
 
@@ -216,24 +216,24 @@ const Platforms = () => {
                         ))}
                       </div>
 
-                      <div className="flex space-x-4">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <Link
                           to={platform.link}
-                          className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-2"
+                          className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center space-x-2 w-full sm:w-auto"
                         >
                           <span>Explorer la plateforme</span>
                           <ExternalLink size={16} />
                         </Link>
                         <Link
                           to="/enrollments"
-                          className="border border-white/30 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors duration-200"
+                          className="border border-white/30 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors duration-200 text-center w-full sm:w-auto"
                         >
                           S'inscrire maintenant
                         </Link>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-2 gap-4 sm:gap-6">
                       {platform.stats.map((stat, statIndex) => (
                         <motion.div
                           key={statIndex}
@@ -241,9 +241,9 @@ const Platforms = () => {
                           whileInView={{ scale: 1, opacity: 1 }}
                           transition={{ delay: statIndex * 0.1, duration: 0.5 }}
                           viewport={{ once: true }}
-                          className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl text-center"
+                          className="bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-2xl text-center"
                         >
-                          <h4 className="text-3xl font-bold mb-2">{stat.value}</h4>
+                          <h4 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">{stat.value}</h4>
                           <p className="text-white/80">{stat.label}</p>
                         </motion.div>
                       ))}
