@@ -69,9 +69,9 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <motion.h1 
-                className="text-5xl md:text-6xl font-bold text-white tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
@@ -89,7 +89,7 @@ const Home = () => {
                  
                 </span>
               </motion.h1>
-              <p className="text-lg md:text-2xl text-white max-w-3xl mx-auto leading-relaxed font-light">
+              <p className="text-base sm:text-lg md:text-2xl text-white max-w-3xl mx-auto leading-relaxed font-light">
                 Connectant l'excellence africaine aux opportunités mondiales
               </p>
             </div>
@@ -99,7 +99,7 @@ const Home = () => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="relative bg-white/80 backdrop-blur-lg p-8 rounded-3xl shadow-2xl max-w-4xl mx-auto border border-gray-100"
+              className="relative bg-white/80 backdrop-blur-lg p-6 sm:p-8 rounded-3xl shadow-2xl max-w-4xl mx-auto border border-gray-100"
             >
               <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
                 <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center ring-4 ring-white">
@@ -107,25 +107,25 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-6 mb-6">
+              <div className="flex items-center space-x-4 sm:space-x-6 mb-4 sm:mb-6">
                 <div className="relative">
                   <img 
                     src="https://res.cloudinary.com/drxouwbms/image/upload/v1755778170/Web_Photo_Editor_1_nik1li.jpg" 
                     alt="Fatou Fabira Dramé" 
-                    className="w-20 h-20 rounded-full object-cover ring-4 ring-green-100"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover ring-4 ring-green-100"
                   />
                   <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center ring-4 ring-white">
                     <Check className="text-white" size={16} />
                   </div>
                 </div>
                 <div className="text-left">
-                  <h3 className="text-2xl font-bold text-gray-900">Message de la présidente</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Message de la présidente</h3>
                   <p className="text-gray-600">Mme Fatou Fabira Dramé</p>
-                  <p className="text-green-600 text-sm font-medium">Présidente de la plateforme</p>
+                  <p className="text-green-600 text-xs sm:text-sm font-medium">Présidente de la plateforme</p>
                 </div>
               </div>
               
-              <p className="text-gray-700 text-lg leading-relaxed italic">
+              <p className="text-gray-700 text-base sm:text-lg leading-relaxed italic">
                 "Chez BAY SA WAAR, nous croyons au potentiel illimité des entreprises africaines.
                 Notre plateforme joue le rôle de pont reliant l'excellence locale aux marchés mondiaux,
                 favorisant l'innovation, le partenariat et une croissance durable à travers le continent."
@@ -136,18 +136,18 @@ const Home = () => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
             >
               <Link
                 to="/enrollments"
-                className="bg-green-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                className="bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
               >
                 <span>Rejoignez notre réseau</span>
                 <ArrowRight size={20} />
               </Link>
               <Link
                 to="/platforms"
-                className="bg-white text-green-600 border-2 border-green-600 px-8 py-4 rounded-full font-semibold hover:bg-green-50 transition-all duration-300 flex items-center justify-center space-x-2"
+                className="bg-white text-green-600 border-2 border-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-green-50 transition-all duration-300 flex items-center justify-center space-x-2"
               >
                 <span>Découvrez les plateformes</span>
                 <Globe size={20} />
@@ -171,15 +171,15 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Notre Impact en Chiffres
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
               Découvrez comment BAY SA WAAR transforme le commerce en Afrique
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -194,8 +194,8 @@ const Home = () => {
                 <div className="relative p-8 text-center">
                   <div className="mb-6 relative">
                     <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-green-400 rounded-full blur-lg opacity-20 group-hover:opacity-30 transition-opacity duration-500" />
-                    <div className="relative w-20 h-20 mx-auto bg-gradient-to-br from-green-600 to-green-400 rounded-full flex items-center justify-center shadow-lg shadow-green-500/20">
-                      <stat.icon className="text-white" size={36} />
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gradient-to-br from-green-600 to-green-400 rounded-full flex items-center justify-center shadow-lg shadow-green-500/20">
+                      <stat.icon className="text-white" size={30} />
                     </div>
                   </div>
 
@@ -204,7 +204,7 @@ const Home = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.2, duration: 0.5 }}
                     viewport={{ once: true }}
-                    className="text-4xl font-bold text-gray-900 mb-3 relative"
+                    className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 relative"
                   >
                     <span className="relative z-10">{stat.number}</span>
                     <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1/2 h-2 bg-green-200/50 -z-10" />
@@ -215,7 +215,7 @@ const Home = () => {
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: index * 0.3, duration: 0.5 }}
                     viewport={{ once: true }}
-                    className="text-gray-600 font-medium"
+                    className="text-gray-600 font-medium text-sm sm:text-base"
                   >
                     {stat.label}
                   </motion.p>
@@ -238,10 +238,10 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Produits et services en vedette
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
               Découvrez les meilleurs produits africains et les solutions commerciales innovantes
             </p>
           </motion.div>
@@ -273,19 +273,19 @@ const Home = () => {
             >
               Solutions Intégrées
             </motion.span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Découvrez notre{' '}
               <span className="relative inline-block">
                 écosystème
                 <div className="absolute bottom-2 left-0 w-full h-3 bg-green-200/50 -z-10 transform -rotate-1"></div>
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
               Des solutions complètes pour développer votre activité en Afrique et au-delà
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {quickAccessCards.map((card, index) => (
               <motion.div
                 key={index}
@@ -296,20 +296,20 @@ const Home = () => {
                 className="group relative"
               >
                 <Link to={card.path}>
-                  <div className="relative p-8 rounded-3xl bg-white border border-gray-100 shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2 h-full">
+                  <div className="relative p-6 sm:p-8 rounded-3xl bg-white border border-gray-100 shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2 h-full">
                     {/* Card Header with Icon */}
                     <div className="relative mb-8">
                       <div className={`absolute inset-0 ${card.color} opacity-20 blur-xl transition-all duration-500 group-hover:opacity-30`} />
-                      <div className={`relative w-16 h-16 ${card.color} rounded-2xl flex items-center justify-center transform transition-all duration-500 group-hover:rotate-6`}>
-                        <card.icon className="text-white" size={32} />
+                      <div className={`relative w-14 h-14 sm:w-16 sm:h-16 ${card.color} rounded-2xl flex items-center justify-center transform transition-all duration-500 group-hover:rotate-6`}>
+                        <card.icon className="text-white" size={28} />
                       </div>
                     </div>
 
                     {/* Card Content */}
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4 transition-colors duration-300 group-hover:text-green-600">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 transition-colors duration-300 group-hover:text-green-600">
                       {card.title}
                     </h3>
-                    <p className="text-gray-600 mb-6 leading-relaxed overflow-hidden h-24">
+                    <p className="text-gray-600 mb-4 sm:mb-6 leading-relaxed overflow-hidden h-24">
                       {card.description}
                     </p>
 
@@ -344,8 +344,8 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Ce que nos clients disent</h2>
-            <p className="text-xl text-gray-600">Fait confiance par les entreprises partout en Afrique</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Ce que nos clients disent</h2>
+            <p className="text-lg sm:text-xl text-gray-600">Fait confiance par les entreprises partout en Afrique</p>
           </motion.div>
           <TestimonialSlider />
         </div>
