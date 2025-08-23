@@ -126,7 +126,7 @@ const Blog = () => {
       className="min-h-screen "
     >
       {/* Hero Section */}
-      <section className="relative py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
+      <section className="relative pt-16 pb-12 sm:py-20 md:py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50"></div>
         
@@ -136,10 +136,10 @@ const Blog = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
               Actualités <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Business</span>
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto px-2 sm:px-0">
               Analyses d'experts, études de marché et success stories de l'écosystème entrepreneurial africain.
             </p>
           </motion.div>
@@ -147,17 +147,17 @@ const Blog = () => {
       </section>
 
       {/* Featured Article */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="mb-12"
+            className="mb-8 sm:mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Article à la Une</h2>
-            <p className="text-gray-600">Nos dernières analyses importantes</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">Article à la Une</h2>
+            <p className="text-gray-600 text-sm sm:text-base">Nos dernières analyses importantes</p>
           </motion.div>
 
           <motion.div
@@ -165,9 +165,9 @@ const Blog = () => {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-2xl shadow-2xl"
+            className="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-2xl"
           >
-            <div className="relative h-96 md:h-[500px]">
+            <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px]">
               <img
                 src={featuredPost.image}
                 alt={featuredPost.title}
@@ -178,32 +178,32 @@ const Blog = () => {
               <div className="absolute inset-0 flex items-center">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                   <div className="max-w-3xl text-white">
-                    <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-4 ${getCategoryColor(featuredPost.category)} text-gray-900 bg-white`}>
+                    <span className={`inline-block px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4 ${getCategoryColor(featuredPost.category)} text-gray-900 bg-white`}>
                       {featuredPost.category}
                     </span>
-                    <h3 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
                       {featuredPost.title}
                     </h3>
-                    <p className="text-xl mb-6 opacity-90 leading-relaxed">
+                    <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6 opacity-90 leading-relaxed">
                       {featuredPost.excerpt}
                     </p>
-                    <div className="flex items-center space-x-6 mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-6 mb-4 sm:mb-6 text-xs sm:text-sm">
                       <div className="flex items-center space-x-2">
-                        <User size={16} />
+                        <User size={14} className="sm:w-4 sm:h-4" />
                         <span>{featuredPost.author}</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <Calendar size={16} />
+                        <Calendar size={14} className="sm:w-4 sm:h-4" />
                         <span>{new Date(featuredPost.date).toLocaleDateString()}</span>
                       </div>
                       <span>{featuredPost.readTime}</span>
                     </div>
                     <Link
                       to={`/blog/${featuredPost.id}`}
-                      className="inline-flex items-center space-x-2 bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition-colors duration-200"
+                      className="inline-flex items-center space-x-2 bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-green-700 transition-colors duration-200 text-sm sm:text-base"
                     >
                       <span>Lire l'Article</span>
-                      <ArrowRight size={16} />
+                      <ArrowRight size={14} className="sm:w-4 sm:h-4" />
                     </Link>
                   </div>
                 </div>
@@ -214,18 +214,18 @@ const Blog = () => {
       </section>
 
       {/* Filters and Search */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-6 sm:py-8 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
             {/* Search */}
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
               <input
                 type="text"
                 placeholder="Rechercher des articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full pl-9 sm:pl-10 pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
               />
             </div>
 
@@ -235,7 +235,7 @@ const Blog = () => {
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-200 ${
                     selectedCategory === category.id
                       ? 'bg-green-600 text-white'
                       : 'bg-white text-gray-700 hover:bg-gray-100'
@@ -250,7 +250,7 @@ const Blog = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
             >
               <option value="latest">Plus Récents</option>
               <option value="oldest">Plus Anciens</option>
@@ -260,9 +260,9 @@ const Blog = () => {
       </section>
 
       {/* Articles Grid */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {sortedPosts.map((post, index) => (
               <motion.article
                 key={post.id}
@@ -270,37 +270,37 @@ const Blog = () => {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group"
+                className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group"
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(post.category)}`}>
+                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
+                    <span className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(post.category)}`}>
                       {post.category}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-green-600 transition-colors duration-200">
+                <div className="p-4 sm:p-6">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight group-hover:text-green-600 transition-colors duration-200">
                     {post.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
+                  <p className="text-gray-600 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">
                     {post.excerpt}
                   </p>
                   
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                    <div className="flex items-center space-x-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4 space-y-1 sm:space-y-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4">
                       <div className="flex items-center space-x-1">
-                        <User size={14} />
+                        <User size={12} className="sm:w-3.5 sm:h-3.5" />
                         <span>{post.author}</span>
                       </div>
                       <div className="flex items-center space-x-1">
-                        <Calendar size={14} />
+                        <Calendar size={12} className="sm:w-3.5 sm:h-3.5" />
                         <span>{new Date(post.date).toLocaleDateString()}</span>
                       </div>
                     </div>
@@ -309,10 +309,10 @@ const Blog = () => {
 
                   <Link
                     to={`/blog/${post.id}`}
-                    className="inline-flex items-center space-x-2 text-green-600 font-semibold hover:text-green-700 transition-colors duration-200"
+                    className="inline-flex items-center space-x-2 text-green-600 font-semibold hover:text-green-700 transition-colors duration-200 text-sm sm:text-base"
                   >
                     <span>Lire Plus</span>
-                    <ArrowRight size={16} />
+                    <ArrowRight size={14} className="sm:w-4 sm:h-4" />
                   </Link>
                 </div>
               </motion.article>
@@ -320,15 +320,15 @@ const Blog = () => {
           </div>
 
           {sortedPosts.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">Aucun article ne correspond à vos critères.</p>
+            <div className="text-center py-8 sm:py-12">
+              <p className="text-gray-600 text-base sm:text-lg">Aucun article ne correspond à vos critères.</p>
             </div>
           )}
         </div>
       </section>
 
       {/* Newsletter Subscription */}
-      <section className="py-16 bg-green-600">
+      <section className="py-12 sm:py-16 bg-green-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -336,17 +336,17 @@ const Blog = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-white mb-4">Ne Manquez Aucune Actualité</h2>
-            <p className="text-xl text-green-100 mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Ne Manquez Aucune Actualité</h2>
+            <p className="text-base sm:text-lg md:text-xl text-green-100 mb-6 sm:mb-8 px-2 sm:px-0">
               Abonnez-vous à notre newsletter pour recevoir nos analyses hebdomadaires et contenus exclusifs.
             </p>
-            <div className="flex flex-col sm:flex-row max-w-md mx-auto space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="flex flex-col sm:flex-row max-w-md mx-auto space-y-3 sm:space-y-0 sm:space-x-4">
               <input
                 type="email"
                 placeholder="Votre adresse email"
-                className="flex-1 px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-green-300"
+                className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-green-300 text-sm sm:text-base"
               />
-              <button className="bg-white text-green-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200">
+              <button className="bg-white text-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 text-sm sm:text-base">
                 S'abonner
               </button>
             </div>

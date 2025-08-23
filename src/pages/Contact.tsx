@@ -114,7 +114,7 @@ const Contact = () => {
       className="min-h-screen "
     >
       {/* Section Héro */}
-      <section className="relative py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
+      <section className="relative pt-16 pb-12 sm:py-20 md:py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50"></div>
         
@@ -124,10 +124,10 @@ const Contact = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
               Contactez <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Nous</span>
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto px-2 sm:px-0">
               Nous sommes là pour vous aider à réussir. Contactez-nous pour du support, des partenariats ou toute question sur nos services.
             </p>
           </motion.div>
@@ -135,20 +135,20 @@ const Contact = () => {
       </section>
 
       {/* Informations de Contact */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Coordonnées</h2>
-            <p className="text-xl text-gray-600">Plusieurs façons de nous contacter</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">Coordonnées</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 px-2 sm:px-0">Plusieurs façons de nous contacter</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={index}
@@ -156,15 +156,15 @@ const Contact = () => {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300"
+                className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-shadow duration-300"
               >
-                <div className={`w-16 h-16 ${info.color} rounded-2xl flex items-center justify-center mb-6`}>
-                  <info.icon size={32} />
+                <div className={`w-12 h-12 sm:w-16 sm:h-16 ${info.color} rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6`}>
+                  <info.icon size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{info.title}</h3>
-                <div className="space-y-2">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">{info.title}</h3>
+                <div className="space-y-1 sm:space-y-2">
                   {info.details.map((detail, detailIndex) => (
-                    <p key={detailIndex} className="text-gray-600">{detail}</p>
+                    <p key={detailIndex} className="text-gray-600 text-sm sm:text-base">{detail}</p>
                   ))}
                 </div>
               </motion.div>
@@ -174,22 +174,22 @@ const Contact = () => {
       </section>
 
       {/* Formulaire de Contact */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Envoyez-nous un Message</h2>
-            <p className="text-xl text-gray-600">Choisissez une catégorie et dites-nous comment nous pouvons vous aider</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">Envoyez-nous un Message</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 px-2 sm:px-0">Choisissez une catégorie et dites-nous comment nous pouvons vous aider</p>
           </motion.div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 md:p-12">
             {/* Category Tabs */}
-            <div className="flex flex-col sm:flex-row mb-8 space-y-2 sm:space-y-0 sm:space-x-4">
+            <div className="flex flex-col sm:flex-row mb-6 sm:mb-8 space-y-2 sm:space-y-0 sm:space-x-4">
               {contactCategories.map((category) => (
                 <button
                   key={category.id}
@@ -197,7 +197,7 @@ const Contact = () => {
                     setActiveTab(category.id);
                     setFormData(prev => ({ ...prev, category: category.id }));
                   }}
-                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-200 ${
+                  className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all duration-200 text-sm sm:text-base ${
                     activeTab === category.id
                       ? 'bg-green-600 text-white shadow-lg'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -208,8 +208,8 @@ const Contact = () => {
               ))}
             </div>
 
-            <div className="mb-6 p-4 bg-green-50 rounded-lg">
-              <p className="text-green-800">
+            <div className="mb-6 p-3 sm:p-4 bg-green-50 rounded-lg">
+              <p className="text-green-800 text-sm sm:text-base">
                 <strong>Sélectionné :</strong> {contactCategories.find(cat => cat.id === activeTab)?.description}
               </p>
             </div>
@@ -218,16 +218,16 @@ const Contact = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`mb-6 p-4 rounded-lg flex items-center space-x-3 ${
+                className={`mb-6 p-3 sm:p-4 rounded-lg flex items-center space-x-3 text-sm sm:text-base ${
                   submitStatus === 'success'
                     ? 'bg-green-50 text-green-800'
                     : 'bg-red-50 text-red-800'
                 }`}
               >
                 {submitStatus === 'success' ? (
-                  <CheckCircle className="text-green-600" size={20} />
+                  <CheckCircle className="text-green-600" size={18} />
                 ) : (
-                  <AlertCircle className="text-red-600" size={20} />
+                  <AlertCircle className="text-red-600" size={18} />
                 )}
                 <span>
                   {submitStatus === 'success'
@@ -237,10 +237,10 @@ const Contact = () => {
               </motion.div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Nom Complet *
                   </label>
                   <input
@@ -249,11 +249,11 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Adresse Email *
                   </label>
                   <input
@@ -262,14 +262,14 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Numéro de Téléphone
                   </label>
                   <input
@@ -277,11 +277,11 @@ const Contact = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Entreprise/Organisation
                   </label>
                   <input
@@ -289,13 +289,13 @@ const Contact = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                   Sujet *
                 </label>
                 <input
@@ -304,12 +304,12 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                   Message *
                 </label>
                 <textarea
@@ -317,8 +317,8 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                   required
-                  rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                  rows={5}
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                   placeholder="Veuillez fournir autant de détails que possible..."
                 />
               </div>
@@ -326,16 +326,16 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-green-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
+                className="w-full bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 text-sm sm:text-base"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="animate-spin" size={20} />
+                                         <Loader2 className="animate-spin" size={18} />
                     <span>Envoi en cours...</span>
                   </>
                 ) : (
                   <>
-                    <Send size={20} />
+                                         <Send size={18} />
                     <span>Envoyer le Message</span>
                   </>
                 )}
@@ -346,25 +346,25 @@ const Contact = () => {
       </section>
 
       {/* Section Chat en Direct */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl sm:rounded-2xl p-8 sm:p-12 text-white"
           >
-            <MessageCircle className="mx-auto mb-6" size={64} />
-            <h3 className="text-3xl font-bold mb-4">Besoin d'Aide Immédiate ?</h3>
-            <p className="text-xl text-blue-100 mb-8">
+                         <MessageCircle className="mx-auto mb-4 sm:mb-6" size={48} />
+            <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Besoin d'Aide Immédiate ?</h3>
+            <p className="text-base sm:text-lg md:text-xl text-blue-100 mb-6 sm:mb-8 px-2 sm:px-0">
               Notre équipe de support est disponible par chat en direct pendant les heures de bureau
             </p>
-            <button className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center space-x-2 mx-auto">
-              <MessageCircle size={20} />
+            <button className="bg-white text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center space-x-2 mx-auto text-sm sm:text-base">
+                             <MessageCircle size={18} />
               <span>Démarrer le Chat</span>
             </button>
-            <p className="text-sm text-blue-200 mt-4">
+            <p className="text-xs sm:text-sm text-blue-200 mt-3 sm:mt-4">
               Disponible Lundi - Vendredi, 8h00 - 18h00 (GMT)
             </p>
           </motion.div>
@@ -372,25 +372,25 @@ const Contact = () => {
       </section>
 
       {/* Section Carte */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Visitez Nos Bureaux</h2>
-            <p className="text-xl text-gray-600">Retrouvez-nous au cœur du quartier des affaires de Dakar</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">Visitez Nos Bureaux</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 px-2 sm:px-0">Retrouvez-nous au cœur du quartier des affaires de Dakar</p>
           </motion.div>
 
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <div className="h-96 bg-gray-200 flex items-center justify-center">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden">
+            <div className="h-64 sm:h-80 md:h-96 bg-gray-200 flex items-center justify-center">
               <div className="text-center">
-                <MapPin className="mx-auto mb-4 text-gray-400" size={48} />
-                <p className="text-gray-600 text-lg">Carte Interactive</p>
-                <p className="text-gray-500">123 Quartier des Affaires, Dakar, Sénégal</p>
+                                 <MapPin className="mx-auto mb-3 sm:mb-4 text-gray-400" size={36} />
+                <p className="text-gray-600 text-base sm:text-lg">Carte Interactive</p>
+                <p className="text-gray-500 text-sm sm:text-base">123 Quartier des Affaires, Dakar, Sénégal</p>
               </div>
             </div>
           </div>
@@ -398,7 +398,7 @@ const Contact = () => {
       </section>
 
       {/* Section Newsletter */}
-      <section className="py-16 bg-green-600">
+      <section className="py-12 sm:py-16 bg-green-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -406,24 +406,24 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-white mb-4">Restez Informé</h2>
-            <p className="text-xl text-green-100 mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Restez Informé</h2>
+            <p className="text-base sm:text-lg md:text-xl text-green-100 mb-6 sm:mb-8 px-2 sm:px-0">
               Abonnez-vous à notre newsletter pour recevoir nos dernières actualités et opportunités
             </p>
 
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row max-w-md mx-auto space-y-4 sm:space-y-0 sm:space-x-4">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row max-w-md mx-auto space-y-3 sm:space-y-0 sm:space-x-4">
               <input
                 type="email"
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="Votre adresse email"
                 required
-                className="flex-1 px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-green-300"
+                className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-green-300 text-sm sm:text-base"
               />
               <button
                 type="submit"
                 disabled={newsletterStatus === 'loading'}
-                className="bg-white text-green-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200"
+                className="bg-white text-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-100 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 text-sm sm:text-base"
               >
                 {newsletterStatus === 'loading' ? 'Inscription...' : 'S\'abonner'}
               </button>
@@ -433,7 +433,7 @@ const Contact = () => {
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-green-100 mt-4"
+                className="text-green-100 mt-3 sm:mt-4 text-sm sm:text-base"
               >
                 Merci de votre inscription ! Vous recevrez bientôt nos dernières actualités.
               </motion.p>

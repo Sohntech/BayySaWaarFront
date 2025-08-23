@@ -134,7 +134,7 @@ const Platforms = () => {
       className="min-h-screen "
     >
       {/* Hero Section */}
-      <section className="relative py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
+      <section className="relative pt-16 pb-12 sm:py-20 md:py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50"></div>
         
@@ -144,38 +144,38 @@ const Platforms = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
               Nos <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Plateformes</span>
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-6 sm:mb-8 px-2 sm:px-0">
               Des solutions numériques exhaustives conçues pour équiper les entreprises africaines et les connecter avec les opportunités mondiales.
             </p>
             <Link
               to="/enrollments"
-              className="inline-flex items-center space-x-2 bg-green-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center space-x-2 bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
             >
               <span>Démarrer dès aujourd'hui</span>
-              <ExternalLink size={20} />
+              <ExternalLink size={18} className="sm:w-5 sm:h-5" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* Main Platforms */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Plateformes clés</h2>
-            <p className="text-xl text-gray-600">Des outils puissants pour chaque aspect de votre entreprise</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">Plateformes clés</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 px-2 sm:px-0">Des outils puissants pour chaque aspect de votre entreprise</p>
           </motion.div>
 
-          <div className="space-y-12 sm:space-y-16">
+          <div className="space-y-8 sm:space-y-12 md:space-y-16">
             {platforms.map((platform, index) => (
               <motion.div
                 key={platform.id}
@@ -183,31 +183,31 @@ const Platforms = () => {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
                 viewport={{ once: true }}
-                className={`relative overflow-hidden rounded-3xl bg-gradient-to-r ${platform.color} text-white`}
+                className={`relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r ${platform.color} text-white`}
               >
                 <div className="absolute inset-0 bg-black/10"></div>
-                <div className="relative p-6 sm:p-10 md:p-12">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                    <div className="space-y-8">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-                          <platform.icon size={28} />
+                <div className="relative p-4 sm:p-6 md:p-10 lg:p-12">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
+                    <div className="space-y-6 sm:space-y-8">
+                      <div className="flex items-center space-x-3 sm:space-x-4">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-white/20 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                          <platform.icon size={20} />
                         </div>
                         <div>
-                          <h3 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">{platform.title}</h3>
-                          <p className="text-white/80 text-base sm:text-lg">{platform.subtitle}</p>
+                          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">{platform.title}</h3>
+                          <p className="text-white/80 text-sm sm:text-base md:text-lg">{platform.subtitle}</p>
                         </div>
                       </div>
                       
-                      <p className="text-base sm:text-lg leading-relaxed text-white/90">
+                      <p className="text-sm sm:text-base md:text-lg leading-relaxed text-white/90">
                         {platform.description}
                       </p>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         {platform.features.slice(0, 4).map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-center space-x-3">
-                            <div className="w-2 h-2 bg-white rounded-full"></div>
-                            <span className="text-white/90">{feature}</span>
+                          <div key={featureIndex} className="flex items-center space-x-2 sm:space-x-3">
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full flex-shrink-0"></div>
+                            <span className="text-white/90 text-xs sm:text-sm md:text-base">{feature}</span>
                           </div>
                         ))}
                       </div>
@@ -215,21 +215,21 @@ const Platforms = () => {
                       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <Link
                           to={platform.link}
-                          className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center space-x-2 w-full sm:w-auto"
+                          className="bg-white text-gray-900 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center space-x-2 w-full sm:w-auto text-sm sm:text-base"
                         >
                           <span>Explorer la plateforme</span>
-                          <ExternalLink size={16} />
+                          <ExternalLink size={14} className="sm:w-4 sm:h-4" />
                         </Link>
                         <Link
                           to="/enrollments"
-                          className="border border-white/30 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors duration-200 text-center w-full sm:w-auto"
+                          className="border border-white/30 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-white/10 transition-colors duration-200 text-center w-full sm:w-auto text-sm sm:text-base"
                         >
                           S'inscrire maintenant
                         </Link>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                       {platform.stats.map((stat, statIndex) => (
                         <motion.div
                           key={statIndex}
@@ -237,10 +237,10 @@ const Platforms = () => {
                           whileInView={{ scale: 1, opacity: 1 }}
                           transition={{ delay: statIndex * 0.1, duration: 0.5 }}
                           viewport={{ once: true }}
-                          className="bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-2xl text-center"
+                          className="bg-white/10 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl text-center"
                         >
-                          <h4 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">{stat.value}</h4>
-                          <p className="text-white/80">{stat.label}</p>
+                          <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 sm:mb-2">{stat.value}</h4>
+                          <p className="text-white/80 text-xs sm:text-sm md:text-base">{stat.label}</p>
                         </motion.div>
                       ))}
                     </div>
@@ -253,20 +253,20 @@ const Platforms = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Pourquoi choisir nos plateformes ?</h2>
-            <p className="text-xl text-gray-600">Conçues spécifiquement pour les entreprises africaines</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">Pourquoi choisir nos plateformes ?</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 px-2 sm:px-0">Conçues spécifiquement pour les entreprises africaines</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
@@ -274,13 +274,13 @@ const Platforms = () => {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+                className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
               >
-                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <benefit.icon className="text-green-600" size={32} />
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                  <benefit.icon className="text-green-600" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{benefit.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">{benefit.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{benefit.description}</p>
               </motion.div>
             ))}
           </div>
@@ -288,20 +288,20 @@ const Platforms = () => {
       </section>
 
       {/* Social Media Platforms */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Rejoignez-nous</h2>
-            <p className="text-xl text-gray-600">Rejoignez notre communauté en pleine croissance sur les plateformes sociales</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">Rejoignez-nous</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 px-2 sm:px-0">Rejoignez notre communauté en pleine croissance sur les plateformes sociales</p>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
             {socialPlatforms.map((social, index) => (
               <motion.a
                 key={social.name}
@@ -313,16 +313,16 @@ const Platforms = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10, scale: 1.05 }}
-                className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 text-center group flex flex-col items-center justify-center w-full max-w-sm md:w-80 lg:w-72"
+                className="block bg-white border border-gray-200 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:shadow-xl transition-all duration-300 text-center group flex flex-col items-center justify-center w-full max-w-xs sm:max-w-sm md:w-80 lg:w-72"
               >
-                <div className={`w-16 h-16 ${social.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <social.icon className="text-white" size={32} />
+                <div className={`w-12 h-12 sm:w-16 sm:h-16 ${social.color} rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <social.icon className="text-white" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">{social.name}</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed text-center max-w-xs">{social.description}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 text-center">{social.name}</h3>
+                <p className="text-gray-600 mb-4 leading-relaxed text-center max-w-xs text-sm sm:text-base">{social.description}</p>
                 <div className="flex items-center justify-center space-x-2 text-center">
-                  <span className="text-2xl font-bold text-gray-900">{social.followers}</span>
-                  <span className="text-gray-500">followers</span>
+                  <span className="text-xl sm:text-2xl font-bold text-gray-900">{social.followers}</span>
+                  <span className="text-gray-500 text-sm sm:text-base">followers</span>
                 </div>
               </motion.a>
             ))}

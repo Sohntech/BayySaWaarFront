@@ -394,7 +394,7 @@ const Enrollments = () => {
       className="min-h-screen  bg-gray-50"
     >
       {/* Hero Section */}
-      <section className="relative py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
+      <section className="relative pt-16 pb-12 sm:py-20 md:py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50"></div>
         
@@ -404,10 +404,10 @@ const Enrollments = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
               Rejoignez notre <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">réseau</span>
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto px-2 sm:px-0">
               Devenez partie de l'écosystème commercial de pointe de l'Afrique. Choisissez votre type d'inscription et commencez votre parcours avec nous aujourd'hui.
             </p>
           </motion.div>
@@ -415,9 +415,9 @@ const Enrollments = () => {
       </section>
 
       {/* Enrollment Types */}
-      <section className="py-16">
+      <section className="py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
             {enrollmentTypes.map((type, index) => (
               <motion.div
                 key={type.id}
@@ -425,25 +425,25 @@ const Enrollments = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 onClick={() => setActiveTab(type.id)}
-                className={`cursor-pointer p-8 rounded-2xl transition-all duration-300 ${
+                className={`cursor-pointer p-6 sm:p-8 rounded-xl sm:rounded-2xl transition-all duration-300 ${
                   activeTab === type.id
                     ? 'bg-green-600 text-white shadow-xl scale-105'
                     : 'bg-white text-gray-900 shadow-lg hover:shadow-xl hover:scale-102'
                 }`}
               >
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${
+                <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 ${
                   activeTab === type.id ? 'bg-white/20' : 'bg-green-100'
                 }`}>
-                  <type.icon className={activeTab === type.id ? 'text-white' : 'text-green-600'} size={32} />
+                  <type.icon className={activeTab === type.id ? 'text-white' : 'text-green-600'} size={24} />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">{type.title}</h3>
-                <p className={`mb-6 ${activeTab === type.id ? 'text-green-100' : 'text-gray-600'}`}>
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{type.title}</h3>
+                <p className={`mb-4 sm:mb-6 text-sm sm:text-base ${activeTab === type.id ? 'text-green-100' : 'text-gray-600'}`}>
                   {type.description}
                 </p>
-                <div className="space-y-2">
+                <div className="space-y-1.5 sm:space-y-2">
                   {type.benefits.map((benefit, benefitIndex) => (
-                    <div key={benefitIndex} className="flex items-center text-sm">
-                      <CheckCircle size={16} className={`mr-2 ${activeTab === type.id ? 'text-green-200' : 'text-green-600'}`} />
+                    <div key={benefitIndex} className="flex items-center text-xs sm:text-sm">
+                      <CheckCircle size={14} className={`mr-2 ${activeTab === type.id ? 'text-green-200' : 'text-green-600'}`} />
                       {benefit}
                     </div>
                   ))}
@@ -457,13 +457,13 @@ const Enrollments = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-2xl shadow-xl p-8 md:p-12"
+            className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 md:p-12"
           >
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <div className="mb-6 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-4">
                 {enrollmentTypes.find(type => type.id === activeTab)?.title} Enrollment
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-sm sm:text-base">
                 Fill out the form below to begin your enrollment process. All fields marked with * are required.
               </p>
             </div>
@@ -472,16 +472,16 @@ const Enrollments = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`mb-6 p-4 rounded-lg flex items-center space-x-3 ${
+                className={`mb-6 p-3 sm:p-4 rounded-lg flex items-center space-x-3 text-sm sm:text-base ${
                   submitStatus === 'success'
                     ? 'bg-green-50 text-green-800'
                     : 'bg-red-50 text-red-800'
                 }`}
               >
                 {submitStatus === 'success' ? (
-                  <CheckCircle className="text-green-600" size={20} />
+                  <CheckCircle className="text-green-600" size={18} />
                 ) : (
-                  <AlertCircle className="text-red-600" size={20} />
+                  <AlertCircle className="text-red-600" size={18} />
                 )}
                 <span>
                   {submitStatus === 'success'
@@ -491,11 +491,11 @@ const Enrollments = () => {
               </motion.div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {renderFormFields()}
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                   Additional Information
                 </label>
                 <textarea
@@ -504,7 +504,7 @@ const Enrollments = () => {
                   onChange={handleInputChange}
                   rows={4}
                   placeholder="Tell us more about your business and why you want to join our network..."
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                 />
               </div>
 
@@ -513,9 +513,9 @@ const Enrollments = () => {
                   type="checkbox"
                   id="terms"
                   required
-                  className="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
                 />
-                <label htmlFor="terms" className="text-sm text-gray-700">
+                <label htmlFor="terms" className="text-xs sm:text-sm text-gray-700">
                   I agree to the <a href="#" className="text-green-600 hover:text-green-700">Terms of Service</a> and{' '}
                   <a href="#" className="text-green-600 hover:text-green-700">Privacy Policy</a>
                 </label>
@@ -524,11 +524,11 @@ const Enrollments = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-green-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
+                className="w-full bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 text-sm sm:text-base"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="animate-spin" size={20} />
+                                         <Loader2 className="animate-spin" size={18} />
                     <span>Submitting...</span>
                   </>
                 ) : (
