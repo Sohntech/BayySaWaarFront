@@ -123,20 +123,23 @@ const Blog = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen pt-16"
+      className="min-h-screen "
     >
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-green-50 via-white to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Actualités <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">Business</span>
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+              Actualités <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Business</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Analyses d'experts, études de marché et success stories de l'écosystème entrepreneurial africain.
             </p>
           </motion.div>

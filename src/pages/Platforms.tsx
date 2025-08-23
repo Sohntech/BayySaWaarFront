@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Globe, ShoppingCart, BookOpen, Facebook, Instagram, Linkedin, Twitter, ExternalLink, Users, TrendingUp, Shield, Zap } from 'lucide-react';
+import { Globe, ShoppingCart, BookOpen, Facebook, Instagram, Linkedin,  ExternalLink, Users, TrendingUp, Shield, Zap } from 'lucide-react';
 
 const Platforms = () => {
   const platforms = [
@@ -79,35 +79,28 @@ const Platforms = () => {
     {
       name: 'Facebook',
       icon: Facebook,
-      description: 'Rejoignez notre communauté de 50 000+ leaders d\'affaires africains',
-      followers: '50K+',
+      description: 'Rejoignez notre communauté de leaders d\'affaires africains',
+      followers: '2,2K+',
       color: 'bg-blue-600',
-      link: '#'
+      link: 'https://www.facebook.com/baysawarr'
     },
     {
       name: 'Instagram',
       icon: Instagram,
       description: 'Histoires visuelles de réussite des entreprises africaines',
-      followers: '25K+',
+      followers: '100+',
       color: 'bg-pink-600',
-      link: '#'
+      link: 'https://www.instagram.com/plateforme_bay_sa_war/?fbclid=IwY2xjawMWgrlleHRuA2FlbQIxMABicmlkETFIM0Q1RkpEUlBXYWtkTm1MAR49Io3FB650UIqas5PzCal3eudmDsKiNqHWJxD9tz95S2bpzLjDEOctol4Jqg_aem_vyO-Noh6CZKOFMJkKb7TVA#'
     },
     {
       name: 'LinkedIn',
       icon: Linkedin,
       description: 'Réseau professionnel pour la croissance des affaires',
-      followers: '30K+',
+      followers: '100+',
       color: 'bg-blue-700',
-      link: '#'
+      link: 'https://www.linkedin.com/in/plateforme-bay-sa-waar-3a899737b/'
     },
-    {
-      name: 'Twitter',
-      icon: Twitter,
-      description: 'Mises à jour en temps réel et analyses de marché',
-      followers: '20K+',
-      color: 'bg-blue-400',
-      link: '#'
-    }
+  
   ];
 
   const benefits = [
@@ -138,20 +131,23 @@ const Platforms = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen pt-16"
+      className="min-h-screen "
     >
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-green-50 via-white to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)' }}>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Nos <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">Plateformes</span>
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+              Nos <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Plateformes</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
               Des solutions numériques exhaustives conçues pour équiper les entreprises africaines et les connecter avec les opportunités mondiales.
             </p>
             <Link
@@ -305,24 +301,26 @@ const Platforms = () => {
             <p className="text-xl text-gray-600">Rejoignez notre communauté en pleine croissance sur les plateformes sociales</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {socialPlatforms.map((social, index) => (
               <motion.a
                 key={social.name}
                 href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10, scale: 1.05 }}
-                className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 text-center group"
+                className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 text-center group flex flex-col items-center justify-center w-full max-w-sm md:w-80 lg:w-72"
               >
-                <div className={`w-16 h-16 ${social.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-16 h-16 ${social.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                   <social.icon className="text-white" size={32} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{social.name}</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">{social.description}</p>
-                <div className="flex items-center justify-center space-x-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">{social.name}</h3>
+                <p className="text-gray-600 mb-4 leading-relaxed text-center max-w-xs">{social.description}</p>
+                <div className="flex items-center justify-center space-x-2 text-center">
                   <span className="text-2xl font-bold text-gray-900">{social.followers}</span>
                   <span className="text-gray-500">followers</span>
                 </div>

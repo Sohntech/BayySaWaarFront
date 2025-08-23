@@ -3,15 +3,14 @@ import { Facebook, Instagram, Linkedin, Twitter, Mail, MapPin} from 'lucide-reac
 
 const Footer = () => {
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook', color: 'hover:bg-blue-600' },
-    { icon: Instagram, href: '#', label: 'Instagram', color: 'hover:bg-pink-600' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:bg-blue-700' },
-    { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:bg-blue-400' },
+    { icon: Facebook, href: 'https://www.facebook.com/baysawarr', label: 'Facebook', color: 'hover:bg-blue-600' },
+    { icon: Instagram, href: 'https://www.instagram.com/plateforme_bay_sa_war/?fbclid=IwY2xjawMWgrlleHRuA2FlbQIxMABicmlkETFIM0Q1RkpEUlBXYWtkTm1MAR49Io3FB650UIqas5PzCal3eudmDsKiNqHWJxD9tz95S2bpzLjDEOctol4Jqg_aem_vyO-Noh6CZKOFMJkKb7TVA#', label: 'Instagram', color: 'hover:bg-pink-600' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/plateforme-bay-sa-waar-3a899737b/', label: 'LinkedIn', color: 'hover:bg-blue-700' },
   ];
 
   const quickLinks = [
     { name: 'À propos', path: '/about' },
-    { name: 'Inscriptions', path: '/enrollments' },
+    { name: 'Enrollement', path: '/enrollments' },
     { name: 'Plateformes', path: '/platforms' },
     { name: 'Contact', path: '/contact' },
     { name: 'Blog', path: '/blog' },
@@ -63,6 +62,8 @@ const Footer = () => {
                   key={index}
                   href={social.href}
                   className={`w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center ${social.color} transition-all duration-300 hover:scale-110`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <social.icon size={16} className="text-white" />
                 </a>
