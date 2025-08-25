@@ -159,7 +159,7 @@ const Dashboard = () => {
     >
       {/* Profile Cover */}
       <div
-        className="relative h-48 md:h-56 w-full rounded-b-3xl overflow-hidden shadow"
+        className="relative h-48 md:h-56 w-full blur-sm rounded-b-3xl overflow-hidden shadow"
         style={{
           background: `url(${userProfile.cover}) center/cover no-repeat`,
         }}

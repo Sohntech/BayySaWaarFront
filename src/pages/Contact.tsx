@@ -345,7 +345,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Section Chat en Direct */}
+      {/* Section Chat en Direct 
       <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -370,6 +370,7 @@ const Contact = () => {
           </motion.div>
         </div>
       </section>
+      */}
 
       {/* Section Carte */}
       <section className="py-12 sm:py-16 bg-gray-50">
@@ -386,12 +387,21 @@ const Contact = () => {
           </motion.div>
 
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden">
-            <div className="h-64 sm:h-80 md:h-96 bg-gray-200 flex items-center justify-center">
-              <div className="text-center">
-                                 <MapPin className="mx-auto mb-3 sm:mb-4 text-gray-400" size={36} />
-                <p className="text-gray-600 text-base sm:text-lg">Carte Interactive</p>
-                <p className="text-gray-500 text-sm sm:text-base">123 Quartier des Affaires, Dakar, Sénégal</p>
-              </div>
+            <div className="h-64 sm:h-80 md:h-96 bg-gray-200 flex items-center justify-center p-0">
+              <iframe
+                title="BAY SA WAAR Localisation"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.893964479836!2d-17.48489382492419!3d14.74085778579259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec172e2e2b1b6b1%3A0x6e2e1b2e1b2e1b2e!2sOuakam%20Cit%C3%A9%20Avion%2C%20Dakar%2C%20S%C3%A9n%C3%A9gal!5e0!3m2!1sfr!2ssn!4v1718030000000!5m2!1sfr!2ssn"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '16rem', width: '100%', height: '100%' }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+            <div className="p-6 text-center">
+              <p className="text-gray-600 text-base sm:text-lg font-semibold">Ouakam cité avion, Dakar, Sénégal</p>
+              <p className="text-gray-500 text-sm sm:text-base">Notre localisation exacte sur la carte interactive ci-dessus</p>
             </div>
           </div>
         </div>

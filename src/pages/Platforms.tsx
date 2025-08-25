@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Globe, ShoppingCart, BookOpen, Facebook, Instagram, Linkedin,  ExternalLink, Users, TrendingUp, Shield, Zap } from 'lucide-react';
+import { Globe, ShoppingCart, BookOpen, Facebook, Instagram, Linkedin,  ExternalLink, Users, TrendingUp, Shield, Zap, Youtube } from 'lucide-react';
 
 const Platforms = () => {
   const platforms = [
@@ -99,6 +99,14 @@ const Platforms = () => {
       followers: '100+',
       color: 'bg-blue-700',
       link: 'https://www.linkedin.com/in/plateforme-bay-sa-waar-3a899737b/'
+    },
+    {
+      name: 'Youtube',
+      icon: Youtube,
+      description: 'Rejoignez notre chaîne YouTube pour des vidéos de qualité',
+      followers: '500+',
+      color: 'bg-red-600',
+      link: 'https://www.youtube.com/@fabiratv2023'
     },
   
   ];

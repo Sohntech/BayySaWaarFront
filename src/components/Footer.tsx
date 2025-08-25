@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Twitter, Mail, MapPin} from 'lucide-react';
+import { Facebook, Instagram, Linkedin,  Mail, MapPin, Youtube} from 'lucide-react';
 
 const Footer = () => {
   const socialLinks = [
     { icon: Facebook, href: 'https://www.facebook.com/baysawarr', label: 'Facebook', color: 'hover:bg-blue-600' },
     { icon: Instagram, href: 'https://www.instagram.com/plateforme_bay_sa_war/?fbclid=IwY2xjawMWgrlleHRuA2FlbQIxMABicmlkETFIM0Q1RkpEUlBXYWtkTm1MAR49Io3FB650UIqas5PzCal3eudmDsKiNqHWJxD9tz95S2bpzLjDEOctol4Jqg_aem_vyO-Noh6CZKOFMJkKb7TVA#', label: 'Instagram', color: 'hover:bg-pink-600' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/plateforme-bay-sa-waar-3a899737b/', label: 'LinkedIn', color: 'hover:bg-blue-700' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/plateforme-bay-sa-waar-3a899737b/', label: 'LinkedIn', color: 'hover:bg-blue-900' },
+    { icon: Youtube, href: 'https://www.youtube.com/@fabiratv2023', label: 'Youtube', color: 'hover:bg-red-600' },
   ];
 
   const quickLinks = [
@@ -95,11 +96,11 @@ const Footer = () => {
             <div className="space-y-2">
               <a href="mailto:contact@baysawaar.com" className="text-gray-400 hover:text-white text-sm transition-colors flex items-center space-x-2">
                 <Mail size={14} className="text-green-400" />
-                <span>contact@baysawaar.com</span>
+                <span>fabirabsw@gmail.com</span>
               </a>
               <p className="text-gray-400 text-sm flex items-center space-x-2">
                 <MapPin size={14} className="text-green-400" />
-                <span>Dakar, Sénégal</span>
+                <span>Ouakam cité avion, Dakar, Senegal</span>
               </p>
             </div>
           </div>
