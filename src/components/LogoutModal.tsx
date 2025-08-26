@@ -47,10 +47,10 @@ const LogoutModal = ({ isOpen, onClose, onConfirm }: LogoutModalProps) => {
             {/* Content */}
             <div className="text-center mb-6">
               <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Confirm Logout
+                Confirmer la déconnexion
               </h3>
               <p className="text-gray-600">
-                Are you sure you want to logout? You'll need to sign in again to access your account.
+                Êtes-vous sûr de vouloir vous déconnecter ? Vous devrez vous reconnecter pour accéder à votre compte.
               </p>
             </div>
 
@@ -60,14 +60,14 @@ const LogoutModal = ({ isOpen, onClose, onConfirm }: LogoutModalProps) => {
                 onClick={onClose}
                 className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
               >
-                Cancel
+                Annuler
               </button>
               <button
                 onClick={onConfirm}
                 className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors flex items-center justify-center space-x-2"
               >
                 <LogOut size={16} />
-                <span>Logout</span>
+                <span>Se déconnecter</span>
               </button>
             </div>
           </motion.div>

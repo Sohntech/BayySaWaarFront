@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Menu, X, LogOut, User } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, LogOut, User, ChevronDown } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import LogoutModal from './LogoutModal';
 
@@ -9,8 +9,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  // eslint-disable-next-line no-empty-pattern
-  const [] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const { user, logout } = useAuth();
 
@@ -21,6 +21,21 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [dropdownOpen]);
 
   const navItems = [
     { name: 'Accueil', path: '/' },
@@ -34,11 +49,30 @@ const Navbar = () => {
   const handleLogout = () => {
     setShowLogoutModal(true);
     setIsOpen(false);
+    setDropdownOpen(false);
   };
 
   const confirmLogout = () => {
     logout();
     setShowLogoutModal(false);
+  };
+
+  // Helper for user photo fallback
+  const getUserPhoto = () => {
+    if (user?.photoURL) return user.photoURL;
+    if (user?.avatar) return user.avatar;
+    // fallback: initials avatar
+    if (user?.name) {
+      const initials = user.name
+        .split(' ')
+        .map((n: string) => n[0])
+        .join('')
+        .toUpperCase();
+      return `https://ui-avatars.com/api/?name=${encodeURIComponent(
+        user.name
+      )}&background=16a34a&color=fff&bold=true`;
+    }
+    return 'https://ui-avatars.com/api/?name=U&background=16a34a&color=fff&bold=true';
   };
 
   return (
@@ -87,13 +121,66 @@ const Navbar = () => {
                     <User size={16} />
                     <span>Dashboard</span>
                   </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="text-gray-700 hover:text-red-600 transition-colors duration-200 flex items-center space-x-2"
-                  >
-                    <LogOut size={16} />
-                    <span>Logout</span>
-                  </button>
+                  {/* User Profile Dropdown */}
+                  <div className="relative" ref={dropdownRef}>
+                    <button
+                      className="flex items-center space-x-2 focus:outline-none"
+                      onClick={() => setDropdownOpen((open) => !open)}
+                      aria-haspopup="true"
+                      aria-expanded={dropdownOpen}
+                    >
+                      <img
+                        src={getUserPhoto()}
+                        alt={user.name || 'User'}
+                        className="w-9 h-9 rounded-full object-cover border-2 border-green-600"
+                      />
+                      <ChevronDown
+                        size={18}
+                        className={`transition-transform duration-200 ${
+                          dropdownOpen ? 'rotate-180' : ''
+                        } text-gray-500`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {dropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.18 }}
+                          className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-100 z-50"
+                        >
+                          <div className="px-4 py-4 flex items-center space-x-3 border-b border-gray-100">
+                            <img
+                              src={getUserPhoto()}
+                              alt={user.name || 'User'}
+                              className="w-12 h-12 rounded-full object-cover border-2 border-green-600"
+                            />
+                            <div>
+                              <div className="font-semibold text-gray-900 text-base truncate max-w-[120px]">
+                                {user.name || 'Utilisateur'}
+                              </div>
+                              {user.role && (
+                                <span className="inline-block mt-1 px-2 py-0.5 text-xs font-semibold rounded bg-green-100 text-green-700">
+                                  {user.role}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="py-2">
+                           
+                            <button
+                              onClick={handleLogout}
+                              className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                            >
+                              <LogOut size={16} className="mr-2" />
+                              Se déconnecter
+                            </button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
               ) : (
                 <Link
@@ -143,6 +230,24 @@ const Navbar = () => {
                   >
                     Dashboard
                   </Link>
+                  {/* User info in mobile menu */}
+                  <div className="flex items-center space-x-3 px-4 py-2">
+                    <img
+                      src={getUserPhoto()}
+                      alt={user.name || 'User'}
+                      className="w-9 h-9 rounded-full object-cover border-2 border-green-600"
+                    />
+                    <div>
+                      <div className="font-semibold text-gray-900 text-sm truncate max-w-[100px]">
+                        {user.name || 'Utilisateur'}
+                      </div>
+                      {user.role && (
+                        <span className="inline-block mt-0.5 px-2 py-0.5 text-xs font-semibold rounded bg-green-100 text-green-700">
+                          {user.role}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                   <button
                     onClick={handleLogout}
                     className="block w-full text-gray-700 hover:text-red-600 transition-colors duration-200 text-center"
