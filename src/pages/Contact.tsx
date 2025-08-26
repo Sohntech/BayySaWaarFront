@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 const Contact = () => {
   const [activeTab, setActiveTab] = useState('information');
@@ -22,19 +22,19 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Siège Social',
-      details: ['123 Quartier des Affaires', 'Dakar, Sénégal', 'Afrique de l\'Ouest'],
+      details: ['Ouakam cité avion, Dakar, Senegal'],
       color: 'bg-green-100 text-green-600'
     },
     {
       icon: Phone,
       title: 'Numéros de Téléphone',
-      details: ['+221 77 123 4567', '+221 33 456 7890', 'Urgence: +221 70 999 0000'],
+      details: ['+221 78 634 95 73'],
       color: 'bg-blue-100 text-blue-600'
     },
     {
       icon: Mail,
       title: 'Adresses Email',
-      details: ['contact@baysawaar.com', 'support@baysawaar.com', 'partenariats@baysawaar.com'],
+      details: ['fabirabsw@gmail.com'],
       color: 'bg-purple-100 text-purple-600'
     },
     {
@@ -389,7 +389,7 @@ const Contact = () => {
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden">
             <div className="h-64 sm:h-80 md:h-96 bg-gray-200 flex items-center justify-center p-0">
               <iframe
-                title="BAY SA WAAR Localisation"
+                title="BAY SA WARR Localisation"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.893964479836!2d-17.48489382492419!3d14.74085778579259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec172e2e2b1b6b1%3A0x6e2e1b2e1b2e1b2e!2sOuakam%20Cit%C3%A9%20Avion%2C%20Dakar%2C%20S%C3%A9n%C3%A9gal!5e0!3m2!1sfr!2ssn!4v1718030000000!5m2!1sfr!2ssn"
                 width="100%"
                 height="100%"

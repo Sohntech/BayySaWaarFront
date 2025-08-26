@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, User, Clock, Share2, Facebook, Twitter, Linkedin, BookOpen, Tag } from 'lucide-react';
@@ -49,10 +48,10 @@ const BlogPost = () => {
       <h2>Looking Ahead</h2>
       <p>As we move toward 2025, the African e-commerce landscape will continue to evolve rapidly. Businesses that embrace these trends while staying true to local market needs will be best positioned for success.</p>
 
-      <p>The future is bright for African e-commerce, with innovation, technology, and entrepreneurship driving unprecedented growth across the continent. Companies like BAY SA WAAR are at the forefront of this transformation, providing the tools and platforms necessary for businesses to thrive in this new digital economy.</p>
+      <p>The future is bright for African e-commerce, with innovation, technology, and entrepreneurship driving unprecedented growth across the continent. Companies like BAY SA WARR are at the forefront of this transformation, providing the tools and platforms necessary for businesses to thrive in this new digital economy.</p>
     `,
     author: 'Amadou Diallo',
-    authorBio: 'CEO & Founder of BAY SA WAAR with 15+ years of experience in African business development and digital transformation.',
+    authorBio: 'CEO & Founder of BAY SA WARR with 15+ years of experience in African business development and digital transformation.',
     date: '2025-01-15',
     category: 'Technology',
     readTime: '8 min read',

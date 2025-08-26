@@ -8,7 +8,7 @@ const Home = () => {
   const quickAccessCards = [
     {
       title: 'A propos de BAY SA WAAR',
-      description: 'Apprenez-en plus sur notre mission, notre vision et notre engagement en faveur de l excellence des entreprises africaines.',
+      description: 'Apprenez-en plus sur notre mission, notre vision et notre engagement',
       icon: Building2,
       path: '/about',
       color: 'bg-green-600',
@@ -22,14 +22,14 @@ const Home = () => {
     },
     {
       title: 'Solutions e-commerce',
-      description: 'Outils de commerce en ligne complets pour d velopper votre pr sence num rique.',
+      description: 'Outils de commerce en ligne pour développer votre présence numérique.',
       icon: ShoppingCart,
       path: '/platforms',
       color: 'bg-purple-600',
     },
     {
       title: 'Programme de partenariat',
-      description: 'Rejoignez notre r seau de distributeurs et de partenaires pour une croissance mutuelle.',
+      description: 'Rejoignez notre réseau de distributeurs et partenaires pour une croissance mutuelle.',
       icon: Handshake,
       path: '/enrollments',
       color: 'bg-orange-600',
@@ -82,9 +82,10 @@ const Home = () => {
   className="text-green-900 bg-clip-text bg-gradient-to-r from-green-900 to-green-900" 
   style={{ 
     WebkitTextStroke: '1px white', 
+  
   }}
 >
-  BAY SA WAAR
+  BAY SA WARR
 </span>
                  
                 </span>
@@ -126,7 +127,7 @@ const Home = () => {
               </div>
               
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed italic">
-                "Chez BAY SA WAAR, nous croyons au potentiel illimité des entreprises africaines.
+                "Chez BAY SA WARR, nous croyons au potentiel illimité des entreprises africaines.
                 Notre plateforme joue le rôle de pont reliant l'excellence locale aux marchés mondiaux,
                 favorisant l'innovation, le partenariat et une croissance durable à travers le continent."
               </p>
@@ -175,7 +176,7 @@ const Home = () => {
               Notre Impact en Chiffres
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-              Découvrez comment BAY SA WAAR transforme le commerce en Afrique
+              Découvrez comment BAY SA WARR transforme le commerce en Afrique
             </p>
           </motion.div>
 

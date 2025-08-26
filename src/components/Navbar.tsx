@@ -55,11 +55,11 @@ const Navbar = () => {
             <Link to="/" className="flex items-center space-x-3">
               <img
                 src="https://res.cloudinary.com/drxouwbms/image/upload/v1755777328/369470771_801733008414799_8805271754561376909_n_c4laj2.jpg"
-                alt="BAY SA WAAR Logo"
+                alt="BAY SA WARR Logo"
                 className="w-10 h-10 rounded-xl object-cover"
               />
               <div>
-                <h1 className="text-xl font-bold text-gray-900">BAYY SA WAAR</h1>
+                <h1 className="text-xl font-bold text-gray-900">BAY SA WARR</h1>
                 <p className="text-xs text-gray-600">Excellence in Commerce</p>
               </div>
             </Link>

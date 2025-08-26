@@ -49,11 +49,13 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center justify-center sm:justify-start space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold">B</span>
-              </div>
+              <img
+                src="https://res.cloudinary.com/drxouwbms/image/upload/v1755777328/369470771_801733008414799_8805271754561376909_n_c4laj2.jpg"
+                alt="BAY SA WARR Logo"
+                className="w-10 h-10 rounded-xl object-cover bg-gradient-to-br from-green-400 to-green-600"
+              />
               <div>
-                <h3 className="text-white font-bold text-center sm:text-left">BAY SA WAAR</h3>
+                <h3 className="text-white font-bold text-center sm:text-left">BAY SA WARR</h3>
                 <p className="text-green-400 text-sm text-center sm:text-left">Excellence in Commerce</p>
               </div>
             </div>

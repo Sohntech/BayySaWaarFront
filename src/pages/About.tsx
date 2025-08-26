@@ -54,10 +54,10 @@ const About = () => {
 
   const team = [
     {
-      name: 'Amadou Diallo',
-      role: 'PDG & Fondateur',
+      name: 'Fatou Fabira Dramé',
+      role: 'PDG & Fondatrice',
       bio: 'Leader visionnaire avec plus de 15 ans d\'expérience dans le commerce international et le développement des affaires en Afrique.',
-      image: 'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://res.cloudinary.com/drxouwbms/image/upload/v1755778170/Web_Photo_Editor_1_nik1li.jpg',
     },
     {
       name: 'Fatou Ndiaye',
@@ -108,7 +108,7 @@ const About = () => {
             className="text-center mb-8 sm:mb-12 md:mb-16"
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-              À propos de <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">BAY SA WAAR</span>
+              À propos de <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">BAY SA WARR</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed px-4">
               Pionnier de l'excellence des entreprises africaines grâce à des plateformes innovantes, 
@@ -132,7 +132,7 @@ const About = () => {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">Notre Histoire</h2>
               <div className="space-y-4 sm:space-y-6">
                 <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
-                  Fondée en 2018, BAY SA WAAR est née d'une vision simple mais puissante : 
+                  Fondée en 2018, BAY SA WARR est née d'une vision simple mais puissante : 
                   créer un écosystème complet où les entreprises africaines pourraient prospérer, 
                   se connecter et concurrencer sur la scène mondiale.
                 </p>
@@ -343,39 +343,188 @@ const About = () => {
       </section>
 
       {/* Partners */}
-      <section className="py-12 sm:py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 sm:py-28 overflow-hidden">
+      {/* Animated Background with Light Gradients */}
+      <div className="absolute inset-0 bg-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-green-50/30 to-transparent"></div>
+      </div>
+      
+      {/* Floating Geometric Shapes */}
+     
+
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="w-full h-full bg-[linear-gradient(rgba(34,197,94,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.1)_1px,transparent_1px)]" 
+             style={{ backgroundSize: '50px 50px' }}></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Enhanced Header */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="text-center mb-16 sm:mb-20"
+        >
           <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="inline-block mb-6"
+          >
+           
+          </motion.div>
+          
+          <motion.h2 
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Nos Partenaires</h2>
-            <p className="text-lg sm:text-xl text-gray-600">En collaboration avec des organisations de premier plan partout en Afrique</p>
-          </motion.div>
+            <span className="bg-black bg-clip-text text-transparent">
+              Nos Partenaires
+            </span>
+          </motion.h2>
+          
+          <motion.p 
+            className="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            En collaboration avec des{" "}
+            <span className="text-transparent bg-black bg-clip-text font-semibold">
+              organisations de premier plan
+            </span>{" "}
+            partout en Afrique
+          </motion.p>
+        </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8">
-            {partners.map((partner, index) => (
-              <motion.div
-                key={index}
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                viewport={{ once: true }}
-                className="flex items-center justify-center"
-              >
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+        {/* Partners Grid with Advanced Animations */}
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 lg:gap-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+        >
+          {partners.map((partner, index) => (
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { 
+                  y: 60, 
+                  opacity: 0, 
+                  scale: 0.8,
+                  rotateY: -30 
+                },
+                visible: { 
+                  y: 0, 
+                  opacity: 1, 
+                  scale: 1,
+                  rotateY: 0,
+                  transition: {
+                    duration: 0.8,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }
+                },
+              }}
+              whileHover={{ 
+                scale: 1.1, 
+                y: -10,
+                rotateY: 10,
+                transition: { duration: 0.3, ease: "easeOut" } 
+              }}
+              className="group flex items-center justify-center perspective-1000"
+            >
+              <div className="relative">
+                {/* Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-green-300/30 to-emerald-400/30 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  whileHover={{
+                    scale: 1.2,
+                  }}
                 />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                
+                {/* Partner Logo Container */}
+                <motion.div 
+                  className="relative bg-white/80 backdrop-blur-xl border border-green-200/50 rounded-3xl p-6 sm:p-8 transition-all duration-500 group-hover:bg-white/90 group-hover:border-green-300 shadow-lg group-hover:shadow-2xl"
+                  whileHover={{
+                    boxShadow: "0 25px 50px -12px rgba(34, 197, 94, 0.25)",
+                  }}
+                >
+                  {/* Inner Glow */}
+                  <div className="absolute inset-1 bg-gradient-to-br from-green-50/50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain relative z-10 filter brightness-100 group-hover:brightness-110 transition-all duration-500"
+                  />
+                  
+                  {/* Animated Border */}
+                  <motion.div
+                    className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100"
+                    style={{
+                      background: "linear-gradient(45deg, transparent, rgba(34, 197, 94, 0.3), transparent, rgba(16, 185, 129, 0.3), transparent)",
+                      backgroundSize: "300% 300%",
+                    }}
+                    animate={{
+                      backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Enhanced Bottom Section */}
+        <motion.div
+          className="mt-20 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <motion.div
+            className="inline-flex items-center space-x-2 text-gray-500 hover:text-green-600 transition-colors duration-300 cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="text-sm font-medium">Et bien d'autres organisations innovantes</span>
+            <motion.div
+              className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [1, 0.5, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
     </motion.div>
   );
 };
