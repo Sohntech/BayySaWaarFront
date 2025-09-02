@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Building, CheckCircle, AlertCircle, Loader2, Handshake } from 'lucide-react';
 
-const gradientBg =
-  'bg-gradient-to-br from-green-400 via-blue-400 to-indigo-500';
-
 const Enrollments = () => {
   const [activeTab, setActiveTab] = useState('partner');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -408,9 +405,11 @@ const Enrollments = () => {
         className="relative pt-20 pb-16 md:pt-28 md:pb-24 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(16,16,32,0.7),rgba(16,16,32,0.7)), url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)',
+            'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)',
         }}
       >
+        <div className="absolute inset-0 bg-black/50"></div>
+
         <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center relative z-10">
           <motion.div
             initial={{ y: 50, opacity: 0 }}

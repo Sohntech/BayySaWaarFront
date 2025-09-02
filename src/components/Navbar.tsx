@@ -70,8 +70,53 @@ const Navbar = () => {
     return 'https://ui-avatars.com/api/?name=U&background=16a34a&color=fff&bold=true';
   };
 
+  // Helper for nav item active state
+  const isActive = (path: string) => location.pathname === path;
+
   return (
     <>
+      <style>
+        {`
+        .nav-link {
+          position: relative;
+          transition: color 0.18s, background 0.18s;
+        }
+        
+        .nav-link:hover, .nav-link:focus-visible {
+          color: #2d8755 !important;
+          background: #f3f4f6;
+        }
+        .nav-link:hover::after, .nav-link:focus-visible::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+        .nav-link.active {
+          color: #ffffff !important;
+          background: #2d8755;
+          font-weight: 700;
+        }
+        .nav-link.active::after {
+          transform: translateX(-50%) scaleX(1);
+          background: #2d8755;
+        }
+        .dashboard-link {
+          transition: box-shadow 0.18s, background 0.18s, color 0.18s;
+          box-shadow: 0 2px 8px 0 rgba(34,197,94,0.08);
+        }
+        .dashboard-link.active {
+          background: #2d8755;
+          color: #fff !important;
+          box-shadow: 0 4px 16px 0 rgba(34,197,94,0.18);
+        }
+        .dashboard-link:not(.active) {
+          background: #f0fdf4;
+          color: #2d8755;
+        }
+        .dashboard-link:hover:not(.active), .dashboard-link:focus-visible:not(.active) {
+          background: #e5f9ec;
+          color: #15803d;
+        }
+        `}
+      </style>
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -98,11 +143,10 @@ const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-sm font-medium transition-colors duration-200 hover:text-green-600 ${
-                    location.pathname === item.path
-                      ? 'text-green-600 border-b-2 border-green-600 pb-1'
-                      : 'text-gray-700'
+                  className={`nav-link text-sm font-medium px-2 py-1 rounded-md transition-all duration-200 ${
+                    isActive(item.path) ? 'active' : 'text-gray-700'
                   }`}
+                  tabIndex={0}
                 >
                   {item.name}
                 </Link>
@@ -111,7 +155,10 @@ const Navbar = () => {
                 <div className="flex items-center space-x-4">
                   <Link
                     to="/dashboard"
-                    className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-green-700 transition-colors duration-200 flex items-center space-x-2"
+                    className={`dashboard-link flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 focus:outline-none ${
+                      isActive('/dashboard') ? 'active' : ''
+                    }`}
+                    tabIndex={0}
                   >
                     <User size={16} />
                     <span>Dashboard</span>
@@ -163,7 +210,6 @@ const Navbar = () => {
                             </div>
                           </div>
                           <div className="py-2">
-                           
                             <button
                               onClick={handleLogout}
                               className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
@@ -190,6 +236,7 @@ const Navbar = () => {
             <button
               className="md:hidden"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -201,39 +248,42 @@ const Navbar = () => {
             animate={{ height: isOpen ? 'auto' : 0 }}
             className="md:hidden overflow-hidden"
           >
-            <div className="py-4 space-y-3">
+            <div className="py-4 space-y-2">
+              {/* Nav links */}
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`block text-sm font-medium transition-colors duration-200 ${
-                    location.pathname === item.path
-                      ? 'text-green-600'
-                      : 'text-gray-700 hover:text-green-600'
+                  className={`flex items-center gap-2 text-base font-medium px-4 py-2 rounded-lg transition-all duration-200 ${
+                    isActive(item.path)
+                      ? 'bg-green-700 text-white font-semibold shadow'
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-green-600'
                   }`}
+                  style={{
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
+                  {/* Removed green line for active link */}
                 </Link>
               ))}
+
+              {/* Divider */}
+              <div className="border-t border-gray-200 my-2" />
+
+              {/* User section */}
               {user ? (
-                <div className="space-y-3 pt-4 border-t border-gray-200">
-                  <Link
-                    to="/dashboard"
-                    className="block bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium text-center"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                  {/* User info in mobile menu */}
-                  <div className="flex items-center space-x-3 px-4 py-2">
+                <div className="flex flex-col gap-2 px-2">
+                  <div className="flex items-center gap-3 px-2 py-2 rounded-lg bg-gray-50">
                     <img
                       src={getUserPhoto()}
                       alt={user.name || 'User'}
-                      className="w-9 h-9 rounded-full object-cover border-2 border-green-600"
+                      className="w-10 h-10 rounded-full object-cover border-2 border-green-600"
                     />
                     <div>
-                      <div className="font-semibold text-gray-900 text-sm truncate max-w-[100px]">
+                      <div className="font-semibold text-gray-900 text-base truncate max-w-[120px]">
                         {user.name || 'Utilisateur'}
                       </div>
                       {user.role && (
@@ -243,19 +293,36 @@ const Navbar = () => {
                       )}
                     </div>
                   </div>
+                  <Link
+                    to="/dashboard"
+                    className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full text-base font-semibold transition-all duration-200 dashboard-link ${
+                      isActive('/dashboard') ? 'active' : ''
+                    }`}
+                    style={{
+                      boxShadow: isActive('/dashboard')
+                        ? '0 4px 16px 0 rgba(34,197,94,0.18)'
+                        : '0 2px 8px 0 rgba(34,197,94,0.08)',
+                    }}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <User size={18} />
+                    Dashboard
+                  </Link>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-gray-700 hover:text-red-600 transition-colors duration-200 text-center"
+                    className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-full text-base font-medium text-red-600 bg-red-50 hover:bg-red-100 transition-colors duration-200"
                   >
-                    Logout
+                    <LogOut size={18} />
+                    Se déconnecter
                   </button>
                 </div>
               ) : (
                 <Link
                   to="/login"
-                  className="block bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium text-center"
+                  className="flex items-center justify-center gap-2 bg-green-600 text-white px-4 py-2 rounded-full text-base font-medium"
                   onClick={() => setIsOpen(false)}
                 >
+                  <User size={18} />
                   Login
                 </Link>
               )}

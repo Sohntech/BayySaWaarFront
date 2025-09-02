@@ -216,45 +216,53 @@ const Blog = () => {
       {/* Filters and Search */}
       <section className="py-6 sm:py-8 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-            {/* Search */}
-            <div className="relative flex-1 max-w-md">
-                              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-              <input
-                type="text"
-                placeholder="Rechercher des articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 sm:pl-10 pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
-              />
+          {/* Responsive Filters/Search Layout */}
+          <div className="flex flex-col gap-4 md:gap-6">
+            {/* Search Bar */}
+            <div className="w-full flex">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <input
+                  type="text"
+                  placeholder="Rechercher des articles..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-base bg-white transition"
+                />
+              </div>
             </div>
-
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-200 ${
-                    selectedCategory === category.id
-                      ? 'bg-green-600 text-white'
-                      : 'bg-white text-gray-700 hover:bg-gray-100'
-                  }`}
+            {/* Filters Row */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-6">
+              {/* Categories */}
+              <div className="flex flex-wrap gap-2 md:gap-3">
+                {categories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => setSelectedCategory(category.id)}
+                    className={`px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium transition-colors duration-200 border ${
+                      selectedCategory === category.id
+                        ? 'bg-green-600 text-white border-green-600 shadow'
+                        : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
+                    }`}
+                  >
+                    {category.name} <span className="hidden sm:inline">({category.count})</span>
+                  </button>
+                ))}
+              </div>
+              {/* Sort */}
+              <div className="flex items-center gap-2 mt-2 md:mt-0">
+                <label htmlFor="sort" className="text-sm text-gray-600 font-medium hidden sm:inline">Trier:</label>
+                <select
+                  id="sort"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm bg-white"
                 >
-                  {category.name} ({category.count})
-                </button>
-              ))}
+                  <option value="latest">Plus Récents</option>
+                  <option value="oldest">Plus Anciens</option>
+                </select>
+              </div>
             </div>
-
-            {/* Sort */}
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
-            >
-              <option value="latest">Plus Récents</option>
-              <option value="oldest">Plus Anciens</option>
-            </select>
           </div>
         </div>
       </section>
