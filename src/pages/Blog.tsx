@@ -328,31 +328,7 @@ const Blog = () => {
       </section>
 
       {/* Newsletter Subscription */}
-      <section className="py-12 sm:py-16 bg-green-600">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Ne Manquez Aucune Actualité</h2>
-            <p className="text-base sm:text-lg md:text-xl text-green-100 mb-6 sm:mb-8 px-2 sm:px-0">
-              Abonnez-vous à notre newsletter pour recevoir nos analyses hebdomadaires et contenus exclusifs.
-            </p>
-            <div className="flex flex-col sm:flex-row max-w-md mx-auto space-y-3 sm:space-y-0 sm:space-x-4">
-              <input
-                type="email"
-                placeholder="Votre adresse email"
-                className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-green-300 text-sm sm:text-base"
-              />
-              <button className="bg-white text-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 text-sm sm:text-base">
-                S'abonner
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+     
     </motion.div>
   );
 };

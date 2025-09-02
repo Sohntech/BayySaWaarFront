@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { path } from 'framer-motion/client';
 import { Target, Eye, Heart, Users, Award, Globe, TrendingUp, Handshake } from 'lucide-react';
 
 const About = () => {
@@ -82,9 +83,9 @@ const About = () => {
   const partners = [
     { name: 'Banque Africaine de Développement', logo: 'https://res.cloudinary.com/drxouwbms/image/upload/v1755780237/Logo_Afrikanische_Entwicklungsbank.svg_oa7ujv.png' },
     { name: 'Commission du Commerce CEDEAO', logo: 'https://res.cloudinary.com/drxouwbms/image/upload/v1755780576/CEDEAO_Logo.svg_vobzi6.png' },
-    { name: 'Alliance Mondiale du Commerce', logo: 'https://res.cloudinary.com/drxouwbms/image/upload/v1755780767/345594175_690121569789202_3483034607438286277_n_m3bu7o.jpg' },
+    { name: 'Alliance Mondiale du Commerce', logo: 'https://res.cloudinary.com/drxouwbms/image/upload/v1756378077/345594175_690121569789202_3483034607438286277_n-removebg-preview_jv7nty.png' },
     { name: 'Initiative Digitale Afrique', logo: 'https://res.cloudinary.com/drxouwbms/image/upload/v1755780910/cropped-cropped-DA_Logo_HG-1_zejbov.png' },
-    { name: 'Promotion Export Sénégal', logo: 'https://res.cloudinary.com/drxouwbms/image/upload/v1755781036/1630632559560_epsrut.jpg' },
+    { name: 'Promotion Export Sénégal', logo: 'https://res.cloudinary.com/drxouwbms/image/upload/v1756378085/1630632559560-removebg-preview_sn0rfl.png' },
     { name: 'Gouvernement du Sénégal', logo: 'https://res.cloudinary.com/drxouwbms/image/upload/v1755781150/Coat_of_arms_of_Senegal.svg_bzqaft.png' },
   ];
 
@@ -172,170 +173,411 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-12 sm:py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg"
-            >
-              <div className="flex items-start sm:items-center mb-4 sm:mb-6 flex-col sm:flex-row">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-600 rounded-full flex items-center justify-center mb-4 sm:mb-0 sm:mr-4">
-                  <Target className="text-white" size={24} />
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Notre mission</h3>
-              </div>
-              <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
-                D'émanciper les entreprises africaines à travers des plateformes 
-                numériques innovantes, des partenariats stratégiques et des systèmes 
-                de soutien exhaustifs qui permettent une croissance durable et une 
-                compétitivité mondiale.
-              </p>
-            </motion.div>
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-white via-green-50/30 to-white relative overflow-hidden">
+      {/* Advanced background elements */}
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-green-400/20 via-emerald-300/10 to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-tl from-blue-400/15 via-green-300/10 to-transparent rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-green-200/10 to-blue-200/10 rounded-full blur-[100px]"></div>
+      </div>
 
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              viewport={{ once: true }}
-              className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg"
-            >
-              <div className="flex items-start sm:items-center mb-4 sm:mb-6 flex-col sm:flex-row">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4 sm:mb-0 sm:mr-4">
-                  <Eye className="text-white" size={24} />
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `url("data:image/svg+xml,%3csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3cpattern id='grid' width='60' height='60' patternUnits='userSpaceOnUse'%3e%3cpath d='m 60 0 l 0 60 m -60 0 l 60 0' stroke='%23000000' stroke-width='1'/%3e%3c/pattern%3e%3c/defs%3e%3crect width='100%25' height='100%25' fill='url(%23grid)' /%3e%3c/svg%3e")`
+      }}></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+         
+          <h2 className="section-title text-black">
+            Mission & Vision
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Les piliers qui guident notre transformation de l'écosystème entrepreneurial africain
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+          {/* Mission Card - Enhanced */}
+          <div className="group relative">
+            {/* Hover glow effect */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-green-400 via-emerald-400 to-green-500 rounded-[32px] opacity-0 group-hover:opacity-20 transition-all duration-500 blur-xl"></div>
+            
+            <div className="relative bg-white/95 backdrop-blur-2xl border border-green-100/50 rounded-[28px] p-8 sm:p-10 shadow-[0_8px_40px_0_rgba(0,0,0,0.06)] hover:shadow-[0_20px_60px_0_rgba(16,185,129,0.12)] transition-all duration-500 group-hover:border-green-200/70">
+              
+              {/* Top decorative line */}
+              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-green-300/60 to-transparent"></div>
+              
+              {/* Icon section with enhanced design */}
+              <div className="flex items-start gap-6 mb-8">
+                <div className="relative flex-shrink-0">
+                  {/* Animated rings */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400/30 to-emerald-500/20 animate-ping"></div>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400/40 to-emerald-500/30 animate-pulse"></div>
+                  
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-500 via-emerald-500 to-green-600 rounded-full flex items-center justify-center shadow-xl border-4 border-white/60 group-hover:scale-110 transition-transform duration-300">
+                    <Target className="text-white drop-shadow-lg" size={28} />
+                  </div>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Notre vision</h3>
+                
+                <div className="flex-grow">
+                  <h3 className="text-3xl sm:text-4xl font-black mb-2 bg-gradient-to-r from-green-700 via-emerald-600 to-green-600 bg-clip-text text-transparent">
+                    Notre Mission
+                  </h3>
+                  <div className="w-16 h-1 bg-gradient-to-r from-green-500 to-emerald-400 rounded-full group-hover:w-24 transition-all duration-300"></div>
+                </div>
               </div>
-              <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
-                D'être le catalyseur principal de la transformation des entreprises 
-                africaines, en créant un marché continental unifié où l'innovation, 
-                l'excellence et la collaboration stimulent une prospérité économique 
-                sans précédent.
-              </p>
-            </motion.div>
+
+              <div className="space-y-4">
+                <p className="text-gray-700 text-lg leading-relaxed font-medium">
+                  D'émanciper les entreprises africaines à travers des plateformes numériques innovantes, des partenariats stratégiques et des systèmes de soutien exhaustifs.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Notre approche permet une croissance durable et une compétitivité mondiale, en transformant les défis en opportunités d'excellence.
+                </p>
+              </div>
+
+              {/* Action indicator */}
+            
+            </div>
+          </div>
+
+          {/* Vision Card - Enhanced */}
+          <div className="group relative">
+            {/* Hover glow effect */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 via-indigo-400 to-blue-500 rounded-[32px] opacity-0 group-hover:opacity-15 transition-all duration-500 blur-xl"></div>
+            
+            <div className="relative bg-white/95 backdrop-blur-2xl border border-blue-100/40 rounded-[28px] p-8 sm:p-10 shadow-[0_8px_40px_0_rgba(0,0,0,0.06)] hover:shadow-[0_20px_60px_0_rgba(59,130,246,0.08)] transition-all duration-500 group-hover:border-blue-200/60">
+              
+              {/* Top decorative line */}
+              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-blue-300/50 to-transparent"></div>
+              
+              {/* Icon section with enhanced design */}
+              <div className="flex items-start gap-6 mb-8">
+                <div className="relative flex-shrink-0">
+                  {/* Animated rings */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/25 to-indigo-500/15 animate-ping" style={{animationDelay: '0.5s'}}></div>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/35 to-indigo-500/25 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                  
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-500 via-indigo-500 to-blue-600 rounded-full flex items-center justify-center shadow-xl border-4 border-white/60 group-hover:scale-110 transition-transform duration-300">
+                    <Eye className="text-white drop-shadow-lg" size={28} />
+                  </div>
+                </div>
+                
+                <div className="flex-grow">
+                  <h3 className="text-3xl sm:text-4xl font-black mb-2 bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-600 bg-clip-text text-transparent">
+                    Notre Vision
+                  </h3>
+                  <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-400 rounded-full group-hover:w-24 transition-all duration-300"></div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <p className="text-gray-700 text-lg leading-relaxed font-medium">
+                  D'être le catalyseur principal de la transformation des entreprises africaines, en créant un marché continental unifié.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Un écosystème où l'innovation, l'excellence et la collaboration stimulent une prospérité économique sans précédent à travers tout le continent.
+                </p>
+              </div>
+
+              {/* Action indicator */}
+             
+            </div>
           </div>
         </div>
-      </section>
+
+        {/* Bottom CTA Section */}
+     
+      </div>
+    </section>
 
       {/* Values */}
-      <section className="py-12 sm:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 sm:py-24 bg-white overflow-hidden">
+        {/* Subtle background shapes */}
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-br from-green-100/60 to-emerald-100/0 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tr from-green-200/40 to-emerald-200/0 rounded-full blur-2xl"></div>
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-8 sm:mb-12"
+            className="text-center mb-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Nos Valeurs Fondamentales</h2>
-            <p className="text-lg sm:text-xl text-gray-600">Les principes qui guident tout ce que nous faisons</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 tracking-tight">
+              Nos Valeurs Fondamentales
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+              Les principes essentiels qui inspirent et guident chacune de nos actions.
+            </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
+                transition={{ delay: index * 0.12, duration: 0.6, type: "spring", stiffness: 60 }}
                 viewport={{ once: true }}
-                className="text-center"
+                className="group relative flex flex-col items-center bg-white/80 border border-green-100 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 px-6 py-8 sm:px-8 sm:py-10"
               >
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="text-green-600" size={24} />
+                {/* Glow ring */}
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-20 h-20 z-0">
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-green-400/20 via-emerald-400/10 to-green-600/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
-                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{value.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main Activities */}
-      <section className="py-12 sm:py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-8 sm:mb-12"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Nos Activités Principales</h2>
-            <p className="text-lg sm:text-xl text-gray-600">Solutions globales pour les entreprises africaines modernes</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            {activities.map((activity, index) => (
-              <motion.div
-                key={index}
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="flex items-start sm:items-center mb-4 sm:mb-6 flex-col sm:flex-row">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-0 sm:mr-4">
-                    <activity.icon className="text-white" size={24} />
+                {/* Icon */}
+                <div className="relative z-10 mb-5">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-green-100 via-emerald-50 to-white rounded-full flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+                    <value.icon className="text-green-600 group-hover:text-emerald-600 transition-colors duration-300" size={32} />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{activity.title}</h3>
                 </div>
-                <p className="text-gray-700 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">{activity.description}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                  {activity.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center text-xs sm:text-sm text-gray-600">
-                      <div className="w-2 h-2 bg-green-600 rounded-full mr-2 flex-shrink-0"></div>
-                      <span className="leading-relaxed">{feature}</span>
-                    </div>
-                  ))}
-                </div>
+                {/* Title */}
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 tracking-tight">
+                  {value.title}
+                </h3>
+                {/* Description */}
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base font-medium text-balance">
+                  {value.description}
+                </p>
+                {/* Minimalistic divider */}
+                <div className="mt-6 w-8 h-1 rounded-full bg-gradient-to-r from-green-400 via-emerald-400 to-green-600 opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Leadership Team */}
-      <section className="py-12 sm:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-14 bg-gray-50 overflow-hidden">
+      {/* Subtle background geometric shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-gray-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-20 w-60 h-60 bg-gray-300/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-1/3 w-40 h-40 bg-gray-200/25 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-balance">
+            Nos Activités Principales
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-pretty">
+            Solutions globales pour les entreprises africaines modernes
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
+          {activities.map((activity, index) => (
+            <div
+              key={index}
+              className="group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:scale-105"
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(16, 185, 129, 0.2)',
+                borderRadius: '24px',
+                padding: '24px',
+                boxShadow: `
+                  0 32px 80px rgba(0, 0, 0, 0.08),
+                  0 16px 40px rgba(16, 185, 129, 0.15),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.8)
+                `
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                e.currentTarget.style.boxShadow = `
+                  0 48px 120px rgba(0, 0, 0, 0.12),
+                  0 24px 60px rgba(16, 185, 129, 0.25),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.9)
+                `;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(16, 185, 129, 0.2)';
+                e.currentTarget.style.boxShadow = `
+                  0 32px 80px rgba(0, 0, 0, 0.08),
+                  0 16px 40px rgba(16, 185, 129, 0.15),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.8)
+                `;
+              }}
+            >
+              {/* Animated background gradient */}
+              <div 
+                className="absolute inset-0 rounded-3xl opacity-60 pointer-events-none"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.04) 50%, transparent 100%)'
+                }}
+              />
+              
+              {/* Tech scanning lines */}
+              <div 
+                className="absolute inset-0 rounded-3xl opacity-30 pointer-events-none"
+                style={{
+                  background: `
+                    linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.15) 50%, transparent 100%),
+                    linear-gradient(0deg, transparent 0%, rgba(5, 150, 105, 0.12) 50%, transparent 100%)
+                  `,
+                  backgroundSize: '100% 2px, 2px 100%',
+                  backgroundPosition: '0 50%, 50% 0',
+                  animation: 'techScan 6s linear infinite'
+                }}
+              />
+
+              {/* Corner accents */}
+              <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-emerald-400/60 rounded-tl-lg"></div>
+              <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-emerald-400/60 rounded-br-lg"></div>
+
+              <div className="flex items-start gap-4 relative z-10">
+                {/* Icon with futuristic styling */}
+                <div className="flex-shrink-0">
+                  <div 
+                    className="relative w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
+                    style={{
+                      background: 'linear-gradient(135deg, #10b981 0%, #059669 30%, #047857 70%, #065f46 100%)',
+                      boxShadow: `
+                        0 20px 40px rgba(16, 185, 129, 0.25),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3)
+                      `,
+                      animation: 'iconFloat 4s ease-in-out infinite'
+                    }}
+                  >
+                    {/* Icon glow effect */}
+                    <div 
+                      className="absolute -inset-2 rounded-full opacity-60"
+                      style={{
+                        background: 'radial-gradient(ellipse, rgba(16, 185, 129, 0.3) 0%, transparent 70%)',
+                        animation: 'pulse 2s ease-in-out infinite'
+                      }}
+                    />
+                    
+                    {/* Inner highlight */}
+                    <div 
+                      className="absolute top-1 left-1 w-4 h-4 rounded-lg opacity-80"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%)',
+                        animation: 'shimmer 3s ease-in-out infinite'
+                      }}
+                    />
+                    
+                    <activity.icon className="w-6 h-6 text-white relative z-10" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 space-y-2">
+                  <h3 
+                    className="text-lg font-bold"
+                    style={{
+                      background: 'linear-gradient(135deg, #1f2937 0%, #4b5563 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      textShadow: '0 2px 10px rgba(16, 185, 129, 0.1)',
+                      animation: 'titleGlow 4s ease-in-out infinite'
+                    }}
+                  >
+                    {activity.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{activity.description}</p>
+                  
+                  {/* Features */}
+                  <div className="pt-2">
+                    <div className="flex flex-wrap gap-1.5">
+                      {activity.features.map((feature, featureIndex) => (
+                        <span 
+                          key={featureIndex} 
+                          className="text-xs px-3 py-1 rounded-full border transition-all duration-200 hover:-translate-y-0.5"
+                          style={{
+                            borderColor: 'rgba(16, 185, 129, 0.3)',
+                            color: '#065f46',
+                            background: 'rgba(16, 185, 129, 0.1)',
+                            backdropFilter: 'blur(4px)',
+                            boxShadow: '0 2px 8px rgba(16, 185, 129, 0.1)'
+                          }}
+                          onMouseEnter={(e) => {
+                            const target = e.target as HTMLElement;
+                            target.style.borderColor = 'rgba(16, 185, 129, 0.5)';
+                            target.style.background = 'rgba(16, 185, 129, 0.15)';
+                          }}
+                          onMouseLeave={(e) => {
+                            const target = e.target as HTMLElement;
+                            target.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                            target.style.background = 'rgba(16, 185, 129, 0.1)';
+                          }}
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+      {/* Leadership Team - Modern Futuristic Minimal UI */}
+      <section className="relative py-16 sm:py-20 bg-gradient-to-br from-white via-slate-50 to-slate-100 overflow-hidden">
+        {/* Futuristic blurred gradient shapes */}
+        <div className="pointer-events-none absolute -top-32 -left-32 w-[32rem] h-[32rem] bg-gradient-to-br from-green-400/20 via-emerald-400/10 to-green-600/10 rounded-full blur-3xl"></div>
+        <div className="pointer-events-none absolute -bottom-40 -right-40 w-[32rem] h-[32rem] bg-gradient-to-tr from-green-300/15 to-teal-500/15 rounded-full blur-3xl"></div>
+        {/* Subtle grid overlay */}
+        <div className="absolute inset-0 opacity-5 z-0">
+          <div className="w-full h-full bg-[linear-gradient(rgba(16,185,129,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.08)_1px,transparent_1px)]" style={{ backgroundSize: '48px 48px' }}></div>
+        </div>
+        <div className="relative max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-8 z-10">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-8 sm:mb-12"
+            className="text-center mb-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Équipe de Direction</h2>
-            <p className="text-lg sm:text-xl text-gray-600">Des leaders expérimentés qui font avancer notre vision</p>
+            <h2 className="section-title">
+              Équipe de Direction
+            </h2>
+            <p className="section-subtitle">
+              Des leaders expérimentés qui font avancer notre vision
+            </p>
           </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 sm:gap-6">
             {team.map((member, index) => (
               <motion.div
                 key={index}
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
+                transition={{ delay: index * 0.10, duration: 0.6, type: "spring", stiffness: 60 }}
                 viewport={{ once: true }}
-                className="text-center group"
+                className="relative group bg-white/90 backdrop-blur-2xl border border-white/60 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 p-5 sm:p-6 flex flex-col items-center"
+                style={{ minHeight: 0 }}
               >
-                <div className="relative mb-4 sm:mb-6">
+                {/* Futuristic floating ring */}
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-24 h-24 z-0">
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-green-400/30 via-emerald-400/20 to-green-600/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                {/* Avatar with glow */}
+                <div className="relative mb-3">
+                  <div className="absolute inset-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto bg-gradient-to-br from-green-400/30 via-emerald-400/20 to-green-600/20 blur-lg opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto object-cover shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto object-cover border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto bg-green-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                <p className="text-green-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">{member.role}</p>
-                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">{member.bio}</p>
+                {/* Name */}
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 tracking-tight text-center">{member.name}</h3>
+                {/* Role */}
+                <p className="text-green-600 font-semibold mb-1 text-xs sm:text-sm uppercase tracking-wider text-center">{member.role}</p>
+                {/* Bio */}
+                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed text-center font-medium">{member.bio}</p>
+                {/* Minimal divider */}
+                <div className="mx-auto mt-4 w-8 h-1 rounded-full bg-gradient-to-r from-green-400 via-emerald-400 to-green-600 opacity-20 group-hover:opacity-60 transition-opacity duration-300"></div>
               </motion.div>
             ))}
           </div>
@@ -378,7 +620,7 @@ const About = () => {
           </motion.div>
           
           <motion.h2 
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 tracking-tight"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}

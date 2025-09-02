@@ -11,7 +11,7 @@ const Footer = () => {
 
   const quickLinks = [
     { name: 'À propos', path: '/about' },
-    { name: 'Enrollement', path: '/enrollments' },
+    { name: 'Enrôlement', path: '/enrollments' },
     { name: 'Plateformes', path: '/platforms' },
     { name: 'Contact', path: '/contact' },
     { name: 'Blog', path: '/blog' },
@@ -56,7 +56,7 @@ const Footer = () => {
               />
               <div>
                 <h3 className="text-white font-bold text-center sm:text-left">BAY SA WARR</h3>
-                <p className="text-green-400 text-sm text-center sm:text-left">Excellence in Commerce</p>
+                <p className="text-green-400 text-sm text-center sm:text-left">Valoriser la création locale</p>
               </div>
             </div>
             <div className="flex space-x-3 justify-center sm:justify-start">

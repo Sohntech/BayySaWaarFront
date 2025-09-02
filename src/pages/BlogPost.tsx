@@ -99,17 +99,35 @@ const BlogPost = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen pt-16"
+      className="min-h-screen "
     >
       {/* Back Navigation */}
-      <section className="py-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        className="py-16 relative"
+        style={{
+          backgroundImage: "url('https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="absolute inset-0 bg-gray-900/60 pointer-events-none" aria-hidden="true"></div>
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             to="/blog"
-            className="inline-flex items-center space-x-2 text-green-600 hover:text-green-700 transition-colors duration-200"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-600/80 border border-white/20 shadow-xl backdrop-blur-md text-white hover:bg-white/10 hover:text-green-100 hover:shadow-lg transition-all duration-200 font-semibold group"
+            style={{
+              marginTop: '-2.5rem',
+              position: 'absolute',
+              left: '1rem',
+              top: '1rem',
+            }}
           >
-            <ArrowLeft size={20} />
-            <span>Back to Blog</span>
+            <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/90 text-green-600 group-hover:bg-green-600/80 group-hover:text-white transition-colors duration-200">
+              <ArrowLeft size={18} />
+            </span>
+            <span className="hidden sm:inline">Back to Blog</span>
+            <span className="sr-only">Back to Blog</span>
           </Link>
         </div>
       </section>

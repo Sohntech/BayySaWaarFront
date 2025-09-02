@@ -40,7 +40,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Accueil', path: '/' },
     { name: 'À propos', path: '/about' },
-    { name: 'Enrollement', path: '/enrollments' },
+    { name: 'Enrôlement', path: '/enrollments' },
     { name: 'Plateformes', path: '/platforms' },
     { name: 'Contact', path: '/contact' },
     { name: 'Blog', path: '/blog' }
@@ -63,11 +63,6 @@ const Navbar = () => {
     if (user?.avatar) return user.avatar;
     // fallback: initials avatar
     if (user?.name) {
-      const initials = user.name
-        .split(' ')
-        .map((n: string) => n[0])
-        .join('')
-        .toUpperCase();
       return `https://ui-avatars.com/api/?name=${encodeURIComponent(
         user.name
       )}&background=16a34a&color=fff&bold=true`;
@@ -94,7 +89,7 @@ const Navbar = () => {
               />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">BAY SA WARR</h1>
-                <p className="text-xs text-gray-600">Excellence in Commerce</p>
+                <p className="text-xs text-gray-600">Valoriser la création locale</p>
               </div>
             </Link>
 
