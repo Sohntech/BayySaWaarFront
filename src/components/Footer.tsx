@@ -48,11 +48,14 @@ const Footer = () => {
     } catch (error: any) {
       console.error('Erreur lors de l\'inscription à la newsletter:', error);
       
-      let errorMessage = error.response.data.error;
-      console.log('🟢 errorMessage:', errorMessage);
+      let errorMessage = 'Une erreur est survenue lors de l\'inscription';
       
-      if (error.response?.status === 400 ) {
+      if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
+        errorMessage = 'La requête a pris trop de temps. Veuillez réessayer.';
+      } else if (error.response?.status === 400) {
         errorMessage = 'Cette adresse email est déjà abonnée à notre newsletter';
+      } else if (error.response?.data?.error) {
+        errorMessage = error.response.data.error;
       } else if (error.response?.data?.message) {
         errorMessage = error.response.data.message;
       }
