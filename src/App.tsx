@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Enrollments from './pages/Enrollments';
-import Dashboard from './pages/Dashboard';
+import DashboardWrapper from './components/DashboardWrapper';
 import Platforms from './pages/Platforms';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
@@ -30,7 +30,7 @@ const AppContent = () => {
           <Route path="/enrollments" element={<Enrollments />} />
           <Route path="/dashboard" element={
             <ProtectedRoute>
-              <Dashboard />
+              <DashboardWrapper />
             </ProtectedRoute>
           } />
           <Route path="/platforms" element={<Platforms />} />

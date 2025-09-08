@@ -15,8 +15,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterStatus, setNewsletterStatus] = useState('');
+ 
 
   const contactInfo = [
     {
@@ -91,20 +90,7 @@ const Contact = () => {
     }
   };
 
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setNewsletterStatus('loading');
-
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setNewsletterStatus('success');
-      setNewsletterEmail('');
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      setNewsletterStatus('error');
-    }
-  };
+  
 
   return (
     <motion.div
@@ -408,49 +394,7 @@ const Contact = () => {
       </section>
 
       {/* Section Newsletter */}
-      <section className="py-12 sm:py-16 bg-green-600">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Restez Informé</h2>
-            <p className="text-base sm:text-lg md:text-xl text-green-100 mb-6 sm:mb-8 px-2 sm:px-0">
-              Abonnez-vous à notre newsletter pour recevoir nos dernières actualités et opportunités
-            </p>
-
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row max-w-md mx-auto space-y-3 sm:space-y-0 sm:space-x-4">
-              <input
-                type="email"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                placeholder="Votre adresse email"
-                required
-                className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-green-300 text-sm sm:text-base"
-              />
-              <button
-                type="submit"
-                disabled={newsletterStatus === 'loading'}
-                className="bg-white text-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-100 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 text-sm sm:text-base"
-              >
-                {newsletterStatus === 'loading' ? 'Inscription...' : 'S\'abonner'}
-              </button>
-            </form>
-
-            {newsletterStatus === 'success' && (
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-green-100 mt-3 sm:mt-4 text-sm sm:text-base"
-              >
-                Merci de votre inscription ! Vous recevrez bientôt nos dernières actualités.
-              </motion.p>
-            )}
-          </motion.div>
-        </div>
-      </section>
+     
     </motion.div>
   );
 };

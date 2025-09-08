@@ -1,61 +1,36 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Building, CheckCircle, AlertCircle, Loader2, Handshake } from 'lucide-react';
+import { enrollmentsAPI } from '../services/api';
+import Swal from 'sweetalert2';
+import ImageUpload from '../components/ImageUpload';
 
 const Enrollments = () => {
   const [activeTab, setActiveTab] = useState('partner');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
-  const [formData, setFormData] = useState<{
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    country: string;
-    city: string;
-    companyName: string;
-    businessType: string;
-    yearsInBusiness: string;
-    website: string;
-    description: string;
-    partnershipType: string;
-    expectedVolume: string;
-    distributionArea: string;
-    targetMarkets: string;
-    experience: string;
-    industry: string;
-    companySize: string;
-    interests: string[];
-  }>({
-    // Common fields
+  const [submitMessage, setSubmitMessage] = useState('');
+  
+  // State adapté exactement au modèle backend
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
     country: '',
     city: '',
-
-    // Business fields
     companyName: '',
     businessType: '',
-    yearsInBusiness: '',
-    website: '',
-    description: '',
-
-    // Partner specific
-    partnershipType: '',
-    expectedVolume: '',
-
-    // Distributor specific
     distributionArea: '',
     targetMarkets: '',
-    experience: '',
-
-    // Client specific
     industry: '',
     companySize: '',
-    interests: [],
+    interests: [] as string[],
   });
+
+  // State pour les images
+  const [companyLogoFiles, setCompanyLogoFiles] = useState<File[]>([]);
+  const [businessDocumentsFiles, setBusinessDocumentsFiles] = useState<File[]>([]);
 
   const enrollmentTypes = [
     {
@@ -111,15 +86,125 @@ const Enrollments = () => {
     }
   };
 
+  const showSuccessNotification = (message: string) => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Succès !',
+      text: message,
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#059669',
+      timer: 5000,
+      timerProgressBar: true,
+    });
+  };
+
+  const showErrorNotification = (message: string) => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Erreur !',
+      text: message,
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#dc2626',
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validation côté client selon les champs du backend
+    const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'country', 'city', 'companyName', 'businessType'];
+    const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
+    
+    if (missingFields.length > 0) {
+      const fieldNames = {
+        firstName: 'Prénom',
+        lastName: 'Nom',
+        email: 'Email',
+        phone: 'Téléphone',
+        country: 'Pays',
+        city: 'Ville',
+        companyName: 'Nom de l\'entreprise',
+        businessType: 'Type d\'entreprise'
+      };
+      
+      const missingFieldNames = missingFields.map(field => fieldNames[field as keyof typeof fieldNames]);
+      showErrorNotification(`Veuillez remplir tous les champs obligatoires : ${missingFieldNames.join(', ')}`);
+      return;
+    }
+    
+    // Validation spécifique selon le type
+    if (activeTab === 'partner' && !formData.distributionArea) {
+      showErrorNotification('Veuillez sélectionner une zone de distribution pour les partenaires');
+      return;
+    }
+    
+    if (activeTab === 'distributor' && (!formData.distributionArea || !formData.targetMarkets)) {
+      showErrorNotification('Veuillez remplir la zone de distribution et les marchés cibles pour les distributeurs');
+      return;
+    }
+    
+    // Validation des champs spécifiques
+    if (!formData.industry) {
+      showErrorNotification('Veuillez sélectionner une industrie');
+      return;
+    }
+    
+    if (!formData.companySize) {
+      showErrorNotification('Veuillez sélectionner une taille d\'entreprise');
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus('');
+    setSubmitMessage('');
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Créer FormData pour l'upload d'images
+      const formDataToSend = new FormData();
+      
+      // Ajouter les données du formulaire
+      formDataToSend.append('type', activeTab);
+      formDataToSend.append('firstName', formData.firstName);
+      formDataToSend.append('lastName', formData.lastName);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('country', formData.country);
+      formDataToSend.append('city', formData.city);
+      formDataToSend.append('companyName', formData.companyName);
+      formDataToSend.append('businessType', formData.businessType);
+      
+      if (formData.distributionArea) {
+        formDataToSend.append('distributionArea', formData.distributionArea);
+      }
+      if (formData.targetMarkets) {
+        formDataToSend.append('targetMarkets', formData.targetMarkets);
+      }
+      if (formData.industry) {
+        formDataToSend.append('industry', formData.industry);
+      }
+      if (formData.companySize) {
+        formDataToSend.append('companySize', formData.companySize);
+      }
+      if (formData.interests.length > 0) {
+        formDataToSend.append('interests', JSON.stringify(formData.interests));
+      }
+      
+      // Ajouter les images
+      if (companyLogoFiles.length > 0) {
+        formDataToSend.append('companyLogo', companyLogoFiles[0]);
+      }
+      
+      businessDocumentsFiles.forEach((file, index) => {
+        formDataToSend.append('businessDocuments', file);
+      });
+
+      const response = await enrollmentsAPI.submitEnrollment(formDataToSend);
       setSubmitStatus('success');
+      setSubmitMessage(response.data?.message || 'Votre demande d\'inscription a été soumise avec succès !');
+      
+      // Notification de succès
+      showSuccessNotification('Votre demande d\'inscription a été soumise avec succès ! Vous recevrez un email de confirmation avec vos identifiants de connexion.');
+      
       // Reset form
       setFormData({
         firstName: '',
@@ -130,20 +215,37 @@ const Enrollments = () => {
         city: '',
         companyName: '',
         businessType: '',
-        yearsInBusiness: '',
-        website: '',
-        description: '',
-        partnershipType: '',
-        expectedVolume: '',
         distributionArea: '',
         targetMarkets: '',
-        experience: '',
         industry: '',
         companySize: '',
         interests: [],
       });
-    } catch (error) {
+      
+      // Reset images
+      setCompanyLogoFiles([]);
+      setBusinessDocumentsFiles([]);
+    } catch (error: any) {
+      console.error('Erreur lors de la soumission:', error);
       setSubmitStatus('error');
+      
+      // Gérer les différents types d'erreurs selon le backend
+      let errorMessage = 'Une erreur s\'est produite lors de la soumission. Veuillez réessayer.';
+      
+      if (error.response?.status === 400) {
+        if (error.response.data?.error) {
+          errorMessage = error.response.data.error;
+        } else {
+          errorMessage = 'Données invalides. Vérifiez que tous les champs obligatoires sont remplis.';
+        }
+      } else if (error.response?.status === 409) {
+        errorMessage = 'Cet email est déjà utilisé. Veuillez utiliser une autre adresse email.';
+      } else if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
+        errorMessage = 'Impossible de se connecter au serveur. Vérifiez votre connexion internet.';
+      }
+      
+      setSubmitMessage(errorMessage);
+      showErrorNotification(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -158,7 +260,7 @@ const Enrollments = () => {
   const renderFormFields = () => {
     const baseFields = (
       <>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label className={labelBase}>Prénom *</label>
             <input
@@ -185,7 +287,7 @@ const Enrollments = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label className={labelBase}>Adresse Email *</label>
             <input
@@ -212,7 +314,7 @@ const Enrollments = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label className={labelBase}>Pays *</label>
             <select
@@ -263,46 +365,25 @@ const Enrollments = () => {
     const partnerFields = (
       <>
         {baseFields}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label className={labelBase}>Type de Partenariat *</label>
+            <label className={labelBase}>Type d'Entreprise *</label>
             <select
-              name="partnershipType"
-              value={formData.partnershipType}
+              name="businessType"
+              value={formData.businessType}
               onChange={handleInputChange}
               required
               className={inputBase}
             >
               <option value="">Sélectionner un type</option>
-              <option value="strategic">Alliance Stratégique</option>
-              <option value="technology">Partenaire Technologique</option>
-              <option value="marketing">Partenaire Marketing</option>
-              <option value="supply">Partenaire Fournisseur</option>
+              <option value="startup">Startup</option>
+              <option value="sme">PME</option>
+              <option value="enterprise">Grande Entreprise</option>
+              <option value="ngo">ONG</option>
+              <option value="government">Gouvernement</option>
+              <option value="other">Autre</option>
             </select>
           </div>
-          <div>
-            <label className={labelBase}>Volume Attendu (Annuel)</label>
-            <select
-              name="expectedVolume"
-              value={formData.expectedVolume}
-              onChange={handleInputChange}
-              className={inputBase}
-            >
-              <option value="">Sélectionner un volume</option>
-              <option value="0-100k">$0 - $100K</option>
-              <option value="100k-500k">$100K - $500K</option>
-              <option value="500k-1m">$500K - $1M</option>
-              <option value="1m+">$1M+</option>
-            </select>
-          </div>
-        </div>
-      </>
-    );
-
-    const distributorFields = (
-      <>
-        {baseFields}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className={labelBase}>Zone de Distribution *</label>
             <select
@@ -319,30 +400,9 @@ const Enrollments = () => {
               <option value="international">International</option>
             </select>
           </div>
-          <div>
-            <label className={labelBase}>Années d'Expérience *</label>
-            <select
-              name="experience"
-              value={formData.experience}
-              onChange={handleInputChange}
-              required
-              className={inputBase}
-            >
-              <option value="">Sélectionner une expérience</option>
-              <option value="0-2">0-2 ans</option>
-              <option value="3-5">3-5 ans</option>
-              <option value="6-10">6-10 ans</option>
-              <option value="10+">10+ ans</option>
-            </select>
-          </div>
         </div>
-      </>
-    );
-
-    const clientFields = (
-      <>
-        {baseFields}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label className={labelBase}>Industrie *</label>
             <select
@@ -358,6 +418,9 @@ const Enrollments = () => {
               <option value="beauty">Beauté & Cosmétiques</option>
               <option value="crafts">Arts & Artisanat</option>
               <option value="technology">Technologie</option>
+              <option value="healthcare">Santé</option>
+              <option value="education">Éducation</option>
+              <option value="finance">Finance</option>
               <option value="other">Autre</option>
             </select>
           </div>
@@ -378,16 +441,140 @@ const Enrollments = () => {
             </select>
           </div>
         </div>
+        
+        <div>
+          <label className={labelBase}>Marchés Cibles</label>
+          <select
+            name="targetMarkets"
+            value={formData.targetMarkets}
+            onChange={handleInputChange}
+            className={inputBase}
+          >
+            <option value="">Sélectionner des marchés cibles</option>
+            <option value="local">Marché Local</option>
+            <option value="regional">Marché Régional</option>
+            <option value="national">Marché National</option>
+            <option value="international">Marché International</option>
+            <option value="africa">Afrique</option>
+            <option value="europe">Europe</option>
+            <option value="americas">Amériques</option>
+            <option value="asia">Asie</option>
+          </select>
+        </div>
       </>
     );
+
+    const distributorFields = (
+      <>
+        {baseFields}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label className={labelBase}>Type d'Entreprise *</label>
+            <select
+              name="businessType"
+              value={formData.businessType}
+              onChange={handleInputChange}
+              required
+              className={inputBase}
+            >
+              <option value="">Sélectionner un type</option>
+              <option value="startup">Startup</option>
+              <option value="sme">PME</option>
+              <option value="enterprise">Grande Entreprise</option>
+              <option value="distributor">Distributeur</option>
+              <option value="wholesaler">Grossiste</option>
+              <option value="retailer">Détaillant</option>
+              <option value="other">Autre</option>
+            </select>
+          </div>
+          <div>
+            <label className={labelBase}>Zone de Distribution *</label>
+            <select
+              name="distributionArea"
+              value={formData.distributionArea}
+              onChange={handleInputChange}
+              required
+              className={inputBase}
+            >
+              <option value="">Sélectionner une zone</option>
+              <option value="local">Local/City</option>
+              <option value="regional">Régional</option>
+              <option value="national">National</option>
+              <option value="international">International</option>
+            </select>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label className={labelBase}>Industrie *</label>
+            <select
+              name="industry"
+              value={formData.industry}
+              onChange={handleInputChange}
+              required
+              className={inputBase}
+            >
+              <option value="">Sélectionner une industrie</option>
+              <option value="textile">Textile & Mode</option>
+              <option value="food">Alimentation & Boissons</option>
+              <option value="beauty">Beauté & Cosmétiques</option>
+              <option value="crafts">Arts & Artisanat</option>
+              <option value="technology">Technologie</option>
+              <option value="healthcare">Santé</option>
+              <option value="education">Éducation</option>
+              <option value="finance">Finance</option>
+              <option value="other">Autre</option>
+            </select>
+          </div>
+          <div>
+            <label className={labelBase}>Taille de l'Entreprise *</label>
+            <select
+              name="companySize"
+              value={formData.companySize}
+              onChange={handleInputChange}
+              required
+              className={inputBase}
+            >
+              <option value="">Sélectionner une taille</option>
+              <option value="startup">Startup (1-10)</option>
+              <option value="small">Petite (11-50)</option>
+              <option value="medium">Moyenne (51-200)</option>
+              <option value="large">Grande (200+)</option>
+            </select>
+          </div>
+        </div>
+        
+        <div>
+          <label className={labelBase}>Marchés Cibles *</label>
+          <select
+            name="targetMarkets"
+            value={formData.targetMarkets}
+            onChange={handleInputChange}
+            required
+            className={inputBase}
+          >
+            <option value="">Sélectionner des marchés cibles</option>
+            <option value="local">Marché Local</option>
+            <option value="regional">Marché Régional</option>
+            <option value="national">Marché National</option>
+            <option value="international">Marché International</option>
+            <option value="africa">Afrique</option>
+            <option value="europe">Europe</option>
+            <option value="americas">Amériques</option>
+            <option value="asia">Asie</option>
+          </select>
+        </div>
+      </>
+    );
+
+    // Section client supprimée car non utilisée dans le backend
 
     switch (activeTab) {
       case 'partner':
         return partnerFields;
       case 'distributor':
         return distributorFields;
-      case 'client':
-        return clientFields;
       default:
         return baseFields;
     }
@@ -402,7 +589,7 @@ const Enrollments = () => {
     >
       {/* Hero Section */}
       <section
-        className="relative pt-20 pb-16 md:pt-28 md:pb-24 bg-cover bg-center bg-no-repeat"
+        className="relative pt-16 pb-10 sm:pt-20 sm:pb-16 md:pt-28 md:pb-24 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
             'url(https://res.cloudinary.com/drxouwbms/image/upload/v1755949759/Screenshot_2025-08-23_at_11_41_05_1_-Picsart-AiImageEnhancer_kfsp1y.png)',
@@ -416,13 +603,13 @@ const Enrollments = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight drop-shadow-lg">
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight drop-shadow-lg">
               Rejoignez notre{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-indigo-400">
                 réseau
               </span>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto px-2 sm:px-0 font-medium drop-shadow">
+            <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto px-2 sm:px-0 font-medium drop-shadow">
               Devenez partie de l'écosystème commercial de pointe de l'Afrique.<br className="hidden sm:inline" />
             </p>
           </motion.div>
@@ -430,9 +617,9 @@ const Enrollments = () => {
       </section>
 
       {/* Enrollment Types */}
-      <section className="py-10 sm:py-16 bg-gradient-to-b from-white via-gray-50 to-blue-50">
-        <div className="w-full flex justify-center items-center mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center items-center">
+      <section className="py-8 xs:py-10 sm:py-16 bg-gradient-to-b from-white via-gray-50 to-blue-50">
+        <div className="w-full flex justify-center items-center mb-10 sm:mb-16 px-2">
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 max-w-4xl w-full">
             {enrollmentTypes.map((type, index) => {
               const isActive = activeTab === type.id;
               return (
@@ -463,7 +650,7 @@ const Enrollments = () => {
                     }
                   }}
                   onClick={() => setActiveTab(type.id)}
-                  className={`group relative w-full h-full min-h-[420px] rounded-3xl focus:outline-none transition-all duration-500 flex flex-col items-center justify-center mx-auto ${
+                  className={`group relative w-full h-full min-h-[340px] xs:min-h-[380px] sm:min-h-[420px] rounded-3xl focus:outline-none transition-all duration-500 flex flex-col items-center justify-center mx-auto ${
                     isActive
                       ? 'bg-white border-2 border-emerald-600 shadow-[0_8px_40px_rgba(5,150,105,0.12)]'
                       : 'bg-white border-2 border-gray-100 hover:border-emerald-200 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(5,150,105,0.08)]'
@@ -496,7 +683,7 @@ const Enrollments = () => {
                   />
 
                   {/* Main content container */}
-                  <div className="relative flex flex-col items-center justify-between p-8 h-full">
+                  <div className="relative flex flex-col items-center justify-between p-5 xs:p-7 sm:p-8 h-full">
                     {/* Icon container with enhanced styling */}
                     <motion.div
                       animate={{
@@ -504,7 +691,7 @@ const Enrollments = () => {
                         rotateY: isActive ? 5 : 0,
                       }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
-                      className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden transition-all duration-500 ${
+                      className={`w-16 h-16 xs:w-20 xs:h-20 rounded-2xl flex items-center justify-center mb-4 xs:mb-6 relative overflow-hidden transition-all duration-500 ${
                         isActive
                           ? 'bg-emerald-600 shadow-[0_8px_24px_rgba(5,150,105,0.25)]'
                           : 'bg-gray-50 group-hover:bg-emerald-50 shadow-[0_4px_16px_rgba(0,0,0,0.08)]'
@@ -541,19 +728,19 @@ const Enrollments = () => {
                               ? 'text-white'
                               : 'text-gray-600 group-hover:text-emerald-600'
                           }`}
-                          size={36}
+                          size={32}
                         />
                       </motion.div>
                     </motion.div>
 
                     {/* Title section */}
-                    <div className="text-center mb-6">
+                    <div className="text-center mb-4 xs:mb-6">
                       <motion.h3 
                         animate={{
                           color: isActive ? '#059669' : '#111827',
                         }}
                         transition={{ duration: 0.3 }}
-                        className="text-2xl font-bold mb-3 leading-tight"
+                        className="text-xl xs:text-2xl font-bold mb-2 xs:mb-3 leading-tight"
                       >
                         {type.title}
                       </motion.h3>
@@ -563,7 +750,7 @@ const Enrollments = () => {
                           color: isActive ? '#047857' : '#6b7280',
                         }}
                         transition={{ duration: 0.3 }}
-                        className="text-base leading-relaxed max-w-xs mx-auto"
+                        className="text-sm xs:text-base leading-relaxed max-w-xs mx-auto"
                       >
                         {type.description}
                       </motion.p>
@@ -571,7 +758,7 @@ const Enrollments = () => {
 
                     {/* Benefits list with enhanced styling */}
                     <motion.div 
-                      className="w-full space-y-3"
+                      className="w-full space-y-2 xs:space-y-3"
                       animate={{
                         opacity: 1,
                       }}
@@ -595,7 +782,7 @@ const Enrollments = () => {
                               scale: isActive ? 1.1 : 1,
                             }}
                             transition={{ duration: 0.3 }}
-                            className="w-5 h-5 rounded-full flex items-center justify-center mr-3 flex-shrink-0"
+                            className="w-5 h-5 rounded-full flex items-center justify-center mr-2 xs:mr-3 flex-shrink-0"
                           >
                             <CheckCircle
                               size={14}
@@ -613,7 +800,7 @@ const Enrollments = () => {
                               fontWeight: isActive ? 600 : 500,
                             }}
                             transition={{ duration: 0.3 }}
-                            className="text-sm leading-relaxed flex-1 text-left"
+                            className="text-xs xs:text-sm leading-relaxed flex-1 text-left"
                           >
                             {benefit}
                           </motion.span>
@@ -672,14 +859,14 @@ const Enrollments = () => {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-3xl shadow-2xl p-6 sm:p-10 md:p-14 border border-gray-100"
+          className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 xs:p-6 sm:p-10 md:p-14 border border-gray-100 max-w-full mx-auto w-full sm:w-auto"
         >
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">
-            <span className="font-light mr-2 text-green-600">Enrôlement</span>
+          <div className="mb-6 sm:mb-8 text-center">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">
+              <span className="font-light mr-2 text-green-600">Enrôlement</span>
               {enrollmentTypes.find((type) => type.id === activeTab)?.title}{' '}
             </h2>
-            <p className="text-gray-500 text-base sm:text-lg">
+            <p className="text-gray-500 text-sm xs:text-base sm:text-lg">
               Remplissez le formulaire ci-dessous pour commencer votre inscription.<br className="hidden sm:inline" />
               <span className="block mt-1">Tous les champs marqués d&apos;un * sont obligatoires.</span>
             </p>
@@ -689,51 +876,81 @@ const Enrollments = () => {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`mb-6 p-4 rounded-xl flex items-center space-x-3 text-base font-medium ${
+              className={`mb-6 p-3 xs:p-4 rounded-xl flex items-center space-x-2 xs:space-x-3 text-sm xs:text-base font-medium ${
                 submitStatus === 'success'
                   ? 'bg-green-50 text-green-800 border border-green-200'
                   : 'bg-red-50 text-red-800 border border-red-200'
               }`}
             >
               {submitStatus === 'success' ? (
-                <CheckCircle className="text-green-600" size={22} />
+                <CheckCircle className="text-green-600" size={20} />
               ) : (
-                <AlertCircle className="text-red-600" size={22} />
+                <AlertCircle className="text-red-600" size={20} />
               )}
               <span>
-                {submitStatus === 'success'
-                  ? "Votre demande d'inscription a été soumise avec succès ! Nous vous contacterons sous 24h."
-                  : "Une erreur s'est produite lors de la soumission. Veuillez réessayer."}
+                {submitMessage}
               </span>
             </motion.div>
           )}
 
           <form
             onSubmit={handleSubmit}
-            className="space-y-6 sm:space-y-8 max-w-2xl mx-auto"
+            className="space-y-5 xs:space-y-6 sm:space-y-8 max-w-full sm:max-w-2xl mx-auto"
           >
             {renderFormFields()}
 
+            {/* Champ description supprimé car il n'existe pas dans le backend */}
+
             <div>
-              <label className={labelBase}>Informations complémentaires</label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                rows={4}
-                placeholder="Parlez-nous de votre entreprise et pourquoi vous souhaitez rejoindre notre réseau..."
-                className={`${inputBase} resize-none`}
+              <label className={labelBase}>Intérêts (optionnel)</label>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {['Textile', 'Mode', 'Artisanat', 'Technologie', 'Santé', 'Éducation', 'Finance', 'Tourisme', 'Agriculture', 'Transport'].map((interest) => (
+                  <label key={interest} className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="interests"
+                      value={interest.toLowerCase()}
+                      checked={formData.interests.includes(interest.toLowerCase())}
+                      onChange={handleInputChange}
+                      className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                    />
+                    <span className="text-sm text-gray-700">{interest}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Upload d'images */}
+            <div className="space-y-6">
+              <ImageUpload
+                label="Logo de l'entreprise"
+                name="companyLogo"
+                multiple={false}
+                maxFiles={1}
+                maxSize={5}
+                onFilesChange={setCompanyLogoFiles}
+                required={false}
+              />
+
+              <ImageUpload
+                label="Documents d'entreprise (certificats, licences, etc.)"
+                name="businessDocuments"
+                multiple={true}
+                maxFiles={5}
+                maxSize={5}
+                onFilesChange={setBusinessDocumentsFiles}
+                required={false}
               />
             </div>
 
-            <div className="flex items-center space-x-3">
+            <div className="flex flex-col xs:flex-row items-start xs:items-center space-y-2 xs:space-y-0 xs:space-x-3">
               <input
                 type="checkbox"
                 id="terms"
                 required
                 className="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
               />
-              <label htmlFor="terms" className="text-sm text-gray-700">
+              <label htmlFor="terms" className="text-xs xs:text-sm text-gray-700">
                 J&apos;accepte les{' '}
                 <a
                   href="#"
@@ -754,11 +971,11 @@ const Enrollments = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-emerald-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-3`}
+              className={`w-full bg-emerald-600 text-white px-6 xs:px-8 py-3 xs:py-4 rounded-xl font-bold text-base xs:text-lg shadow-lg hover:bg-emerald-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 xs:space-x-3`}
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="animate-spin" size={22} />
+                  <Loader2 className="animate-spin" size={20} />
                   <span>Envoi en cours...</span>
                 </>
               ) : (

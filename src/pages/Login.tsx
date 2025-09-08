@@ -11,24 +11,93 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [willClearFields, setWillClearFields] = useState(false);
 
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (error) setError('');
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    if (error) setError('');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
+
     setError('');
+
+    // Prevent reload and show error if fields are empty
+    if (!email.trim() || !password.trim()) {
+      setError('Veuillez remplir tous les champs.');
+      return;
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setError('Veuillez saisir une adresse email valide.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      const success = await login(email, password);
+      const success = await login(email.trim(), password);
       if (success) {
         navigate('/dashboard');
-      } else {
-        setError('Email ou mot de passe invalide');
       }
-    } catch (err) {
-      setError('Une erreur s\'est produite. Veuillez réessayer.');
+    } catch (err: any) {
+      // Improved error handling
+      if (err?.response?.status === 401) {
+        setError('Email ou mot de passe incorrect. Veuillez vérifier vos identifiants.');
+        setEmail('');
+        setPassword('');
+      } else if (err?.response?.status === 400) {
+        if (err.response.data?.message) {
+          setError(err.response.data.message);
+        } else {
+          setError('Données de connexion invalides. Vérifiez le format de votre email.');
+        }
+      } else if (err?.response?.status === 404) {
+        setError('Aucun compte associé à cet email. Vérifiez votre adresse email.');
+      } else if (err?.response?.status === 429) {
+        setError('Trop de tentatives de connexion. Veuillez patienter quelques minutes.');
+      } else if (err?.response?.status === 500) {
+        setError('Erreur serveur. Veuillez réessayer plus tard ou contacter le support.');
+      } else if (err.code === 'ERR_NETWORK' || err.message === 'Network Error') {
+        setError('Impossible de se connecter au serveur. Vérifiez votre connexion internet.');
+      } else if (err.message) {
+        const errorMessage = err.message;
+        if (errorMessage.includes('Identifiants invalides') || errorMessage.includes('Invalid credentials')) {
+          setError('Email ou mot de passe incorrect. Veuillez vérifier vos identifiants.');
+          setWillClearFields(true);
+          setTimeout(() => {
+            setEmail('');
+            setPassword('');
+            setWillClearFields(false);
+          }, 4000);
+        } else if (errorMessage.includes('Email déjà utilisé')) {
+          setError('Cet email est déjà utilisé par un autre compte.');
+        } else if (errorMessage.includes('Email')) {
+          setError('Format d\'email invalide. Veuillez saisir une adresse email valide.');
+        } else if (errorMessage.includes('Mot de passe') || errorMessage.includes('password')) {
+          setError('Le mot de passe doit contenir au moins 6 caractères.');
+        } else if (errorMessage.includes('Compte bloqué') || errorMessage.includes('account locked')) {
+          setError('Votre compte a été temporairement bloqué. Contactez le support.');
+        } else if (errorMessage.includes('Compte inactif') || errorMessage.includes('inactive')) {
+          setError('Votre compte est inactif. Vérifiez votre email pour l\'activer.');
+        } else {
+          setError(errorMessage);
+        }
+      } else {
+        setError('Une erreur inattendue s\'est produite. Veuillez réessayer.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -130,6 +199,12 @@ const Login = () => {
                         <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                         <span>{error}</span>
                       </div>
+                      {willClearFields && (
+                        <div className="mt-2 text-xs text-red-600 flex items-center space-x-1">
+                          <div className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse"></div>
+                          <span>Les champs seront vidés dans quelques secondes...</span>
+                        </div>
+                      )}
                     </motion.div>
                   )}
 
@@ -145,10 +220,11 @@ const Login = () => {
                         type="email"
                         id="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                         placeholder="votre@email.com"
-                        className="relative w-full pl-9 xs:pl-10 sm:pl-11 pr-2 xs:pr-3 sm:pr-4 py-2.5 xs:py-3 sm:py-3.5 border border-slate-200/60 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500/40 transition-all duration-200 bg-white/60 backdrop-blur-sm hover:bg-white/80 text-slate-800 placeholder-slate-400 text-xs xs:text-sm sm:text-base"
-                        required
+                        className={`relative w-full pl-9 xs:pl-10 sm:pl-11 pr-2 xs:pr-3 sm:pr-4 py-2.5 xs:py-3 sm:py-3.5 border rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500/40 transition-all duration-200 bg-white/60 backdrop-blur-sm hover:bg-white/80 text-slate-800 placeholder-slate-400 text-xs xs:text-sm sm:text-base ${
+                          willClearFields ? 'border-red-300 bg-red-50/30' : 'border-slate-200/60'
+                        }`}
                       />
                     </div>
                   </div>
@@ -165,10 +241,11 @@ const Login = () => {
                         type={showPassword ? 'text' : 'password'}
                         id="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePasswordChange}
                         placeholder="••••••••"
-                        className="relative w-full pl-9 xs:pl-10 sm:pl-11 pr-10 xs:pr-11 sm:pr-12 py-2.5 xs:py-3 sm:py-3.5 border border-slate-200/60 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500/40 transition-all duration-200 bg-white/60 backdrop-blur-sm hover:bg-white/80 text-slate-800 placeholder-slate-400 text-xs xs:text-sm sm:text-base"
-                        required
+                        className={`relative w-full pl-9 xs:pl-10 sm:pl-11 pr-10 xs:pr-11 sm:pr-12 py-2.5 xs:py-3 sm:py-3.5 border rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500/40 transition-all duration-200 bg-white/60 backdrop-blur-sm hover:bg-white/80 text-slate-800 placeholder-slate-400 text-xs xs:text-sm sm:text-base ${
+                          willClearFields ? 'border-red-300 bg-red-50/30' : 'border-slate-200/60'
+                        }`}
                       />
                       <button
                         type="button"
@@ -232,7 +309,9 @@ const Login = () => {
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 rounded-xl"></div>
                   </motion.button>
                 </motion.form>
-                {/* Removed Sign Up Link */}
+                
+                {/* Sign Up Link */}
+               
               </div>
             </div>
           </div>

@@ -1,75 +1,120 @@
 import { motion } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, Calendar, User, Clock, Share2, Facebook, Twitter, Linkedin, BookOpen, Tag } from 'lucide-react';
+import { blogsAPI } from '../services/api';
+import Swal from 'sweetalert2';
+
+interface BlogPost {
+  _id: string;
+  title: string;
+  content: string;
+  author: string;
+  authorBio: string;
+  category: string;
+  tags: string[];
+  featuredImage: {
+    publicId: string;
+    url: string;
+    alt: string;
+  };
+  gallery: Array<{
+    publicId: string;
+    url: string;
+    alt: string;
+    caption: string;
+  }>;
+  readTime: string;
+  metaDescription: string;
+  slug: string;
+  isPublished: boolean;
+  publishedAt: string;
+  createdAt: string;
+}
 
 const BlogPost = () => {
   const { id } = useParams();
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Mock blog post data - in a real app, this would be fetched based on the ID
-  const post = {
-    id: id,
-    title: 'The Future of African E-commerce: Trends Shaping 2025',
-    content: `
-      <p>The African e-commerce landscape is experiencing unprecedented growth, with digital transformation accelerating across the continent. As we look toward 2025, several key trends are emerging that will fundamentally reshape how businesses operate and consumers shop in Africa.</p>
+  useEffect(() => {
+    if (id) {
+      fetchBlogPost();
+    }
+  }, [id]);
 
-      <h2>Mobile-First Revolution</h2>
-      <p>With mobile phone penetration reaching over 80% across sub-Saharan Africa, the mobile-first approach is no longer optional—it's essential. Businesses that prioritize mobile experiences are seeing conversion rates up to 300% higher than their desktop-focused competitors.</p>
-
-      <p>The rise of mobile money services like M-Pesa, Orange Money, and MTN Mobile Money has created a robust payment infrastructure that bypasses traditional banking systems. This has opened up e-commerce opportunities for millions of previously unbanked Africans.</p>
-
-      <h2>Blockchain and Cryptocurrency Integration</h2>
-      <p>African markets are leading the world in cryptocurrency adoption, with countries like Nigeria, Kenya, and South Africa showing remarkable growth in crypto usage. Forward-thinking e-commerce platforms are beginning to integrate blockchain technology for:</p>
-
-      <ul>
-        <li>Transparent supply chain tracking</li>
-        <li>Secure cross-border transactions</li>
-        <li>Smart contracts for automated business processes</li>
-        <li>Decentralized identity verification</li>
-      </ul>
-
-      <h2>Artificial Intelligence and Personalization</h2>
-      <p>AI-powered personalization is becoming increasingly sophisticated, allowing e-commerce platforms to offer highly targeted product recommendations and customized shopping experiences. Machine learning algorithms are being used to:</p>
-
-      <ul>
-        <li>Predict customer behavior and preferences</li>
-        <li>Optimize inventory management</li>
-        <li>Automate customer service through intelligent chatbots</li>
-        <li>Enhance fraud detection and security</li>
-      </ul>
-
-      <h2>Sustainable and Ethical Commerce</h2>
-      <p>African consumers are increasingly conscious of sustainability and ethical business practices. E-commerce platforms that prioritize environmental responsibility and fair trade practices are gaining significant market share.</p>
-
-      <p>This trend is driving innovation in packaging, logistics, and supply chain management, with companies investing in eco-friendly solutions and supporting local communities.</p>
-
-      <h2>Cross-Border Trade Facilitation</h2>
-      <p>The African Continental Free Trade Area (AfCFTA) is creating new opportunities for cross-border e-commerce. Platforms that can navigate the complex regulatory landscape while providing seamless cross-border shopping experiences will dominate the market.</p>
-
-      <h2>Looking Ahead</h2>
-      <p>As we move toward 2025, the African e-commerce landscape will continue to evolve rapidly. Businesses that embrace these trends while staying true to local market needs will be best positioned for success.</p>
-
-      <p>The future is bright for African e-commerce, with innovation, technology, and entrepreneurship driving unprecedented growth across the continent. Companies like BAY SA WARR are at the forefront of this transformation, providing the tools and platforms necessary for businesses to thrive in this new digital economy.</p>
-    `,
-    author: 'Amadou Diallo',
-    authorBio: 'CEO & Founder of BAY SA WARR with 15+ years of experience in African business development and digital transformation.',
-    date: '2025-01-15',
-    category: 'Technology',
-    readTime: '8 min read',
-    image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    tags: ['E-commerce', 'Technology', 'Africa', 'Digital Transformation', 'Mobile Commerce'],
-    relatedPosts: [
-      {
-        id: '2',
-        title: 'Building Successful Partnerships Across African Markets',
-        image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=400'
-      },
-      {
-        id: '4',
-        title: 'Leveraging Technology for Supply Chain Optimization',
-        image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=400'
+  const fetchBlogPost = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Récupérer l'article principal
+      const response = await blogsAPI.getBlogById(id!);
+      
+      if (!response.data.blog) {
+        throw new Error('Article non trouvé');
       }
-    ]
+      
+      setPost(response.data.blog);
+      
+      // Récupérer les articles liés (même catégorie, excluant l'article actuel)
+      const relatedResponse = await blogsAPI.getAllBlogs();
+      const allBlogs = relatedResponse.data.blogs || [];
+      const related = allBlogs
+        .filter((relatedBlog: BlogPost) => 
+          relatedBlog._id !== id && 
+          relatedBlog.category === response.data.blog.category && 
+          relatedBlog.isPublished
+        )
+        .slice(0, 2);
+      setRelatedPosts(related);
+      
+    } catch (error: any) {
+      console.error('Erreur lors du chargement de l\'article:', error);
+      setError('Article non trouvé ou erreur de chargement');
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Impossible de charger l\'article',
+        confirmButtonColor: '#dc2626',
+      });
+    } finally {
+      setLoading(false);
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Chargement de l'article...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !post) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Article non trouvé</h1>
+          <p className="text-gray-600 mb-6">L'article que vous recherchez n'existe pas ou a été supprimé.</p>
+          <Link
+            to="/blog"
+            className="inline-flex items-center space-x-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+          >
+            <ArrowLeft size={16} />
+            <span>Retour au blog</span>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
@@ -155,11 +200,11 @@ const BlogPost = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Calendar size={16} />
-                <span>{new Date(post.date).toLocaleDateString()}</span>
+                <span>{new Date(post.publishedAt || post.createdAt).toLocaleDateString('fr-FR')}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Clock size={16} />
-                <span>{post.readTime}</span>
+                <span>{post.readTime || '5 min read'}</span>
               </div>
             </div>
 
@@ -198,8 +243,8 @@ const BlogPost = () => {
             className="mb-12"
           >
             <img
-              src={post.image}
-              alt={post.title}
+              src={post.featuredImage?.url || 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200'}
+              alt={post.featuredImage?.alt || post.title}
               className="w-full h-96 object-cover rounded-2xl shadow-2xl"
             />
           </motion.div>
@@ -230,14 +275,18 @@ const BlogPost = () => {
           <div className="flex flex-wrap items-center space-x-2">
             <Tag className="text-gray-600" size={20} />
             <span className="text-gray-600 font-medium">Tags:</span>
-            {post.tags.map((tag, index) => (
-              <span
-                key={index}
-                className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
+            {post.tags && post.tags.length > 0 ? (
+              post.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full"
+                >
+                  {tag}
+                </span>
+              ))
+            ) : (
+              <span className="text-gray-500 text-sm">Aucun tag</span>
+            )}
           </div>
         </div>
       </section>
@@ -258,7 +307,7 @@ const BlogPost = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">About {post.author}</h3>
-                <p className="text-gray-600 leading-relaxed">{post.authorBio}</p>
+                <p className="text-gray-600 leading-relaxed">{post.authorBio || 'Auteur passionné par l\'innovation et le développement.'}</p>
               </div>
             </div>
           </motion.div>
@@ -280,36 +329,43 @@ const BlogPost = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {post.relatedPosts.map((relatedPost, index) => (
-              <motion.div
-                key={relatedPost.id}
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group"
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={relatedPost.image}
-                    alt={relatedPost.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-green-600 transition-colors duration-200">
-                    {relatedPost.title}
-                  </h3>
-                  <Link
-                    to={`/blog/${relatedPost.id}`}
-                    className="inline-flex items-center space-x-2 text-green-600 font-semibold hover:text-green-700 transition-colors duration-200"
-                  >
-                    <BookOpen size={16} />
-                    <span>Read Article</span>
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
+            {relatedPosts.length > 0 ? (
+              relatedPosts.map((relatedPost, index) => (
+                <motion.div
+                  key={relatedPost._id}
+                  initial={{ y: 30, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group"
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={relatedPost.featuredImage?.url || 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=400'}
+                      alt={relatedPost.featuredImage?.alt || relatedPost.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-green-600 transition-colors duration-200">
+                      {relatedPost.title}
+                    </h3>
+                    <Link
+                      to={`/blog/${relatedPost._id}`}
+                      className="inline-flex items-center space-x-2 text-green-600 font-semibold hover:text-green-700 transition-colors duration-200"
+                    >
+                      <BookOpen size={16} />
+                      <span>Lire l'article</span>
+                    </Link>
+                  </div>
+                </motion.div>
+              ))
+            ) : (
+              <div className="col-span-2 text-center py-8">
+                <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-600">Aucun article lié trouvé</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -59,15 +59,32 @@ const Navbar = () => {
 
   // Helper for user photo fallback
   const getUserPhoto = () => {
+    console.log('🟢 user:', user);
+    // Priorité à la nouvelle propriété photo (Cloudinary)
+    if (user?.photo?.url) return user.photo.url;
     if (user?.photoURL) return user.photoURL;
     if (user?.avatar) return user.avatar;
     // fallback: initials avatar
-    if (user?.name) {
+    if (user?.firstName && user?.lastName) {
       return `https://ui-avatars.com/api/?name=${encodeURIComponent(
-        user.name
+        `${user.firstName} ${user.lastName}`
       )}&background=16a34a&color=fff&bold=true`;
     }
     return 'https://ui-avatars.com/api/?name=U&background=16a34a&color=fff&bold=true';
+  };
+
+  // Helper for user display name
+  const getUserDisplayName = () => {
+    if (user?.firstName && user?.lastName) {
+      return `${user.firstName} ${user.lastName}`;
+    }
+    if (user?.firstName) {
+      return user.firstName;
+    }
+    if (user?.email) {
+      return user.email.split('@')[0];
+    }
+    return 'Utilisateur';
   };
 
   // Helper for nav item active state
@@ -173,7 +190,7 @@ const Navbar = () => {
                     >
                       <img
                         src={getUserPhoto()}
-                        alt={user.name || 'User'}
+                        alt={getUserDisplayName()}
                         className="w-9 h-9 rounded-full object-cover border-2 border-green-600"
                       />
                       <ChevronDown
@@ -195,12 +212,12 @@ const Navbar = () => {
                           <div className="px-4 py-4 flex items-center space-x-3 border-b border-gray-100">
                             <img
                               src={getUserPhoto()}
-                              alt={user.name || 'User'}
+                              alt={getUserDisplayName()}
                               className="w-12 h-12 rounded-full object-cover border-2 border-green-600"
                             />
                             <div>
                               <div className="font-semibold text-gray-900 text-base truncate max-w-[120px]">
-                                {user.name || 'Utilisateur'}
+                                {getUserDisplayName()}
                               </div>
                               {user.role && (
                                 <span className="inline-block mt-1 px-2 py-0.5 text-xs font-semibold rounded bg-green-100 text-green-700">
@@ -279,12 +296,12 @@ const Navbar = () => {
                   <div className="flex items-center gap-3 px-2 py-2 rounded-lg bg-gray-50">
                     <img
                       src={getUserPhoto()}
-                      alt={user.name || 'User'}
+                      alt={getUserDisplayName()}
                       className="w-10 h-10 rounded-full object-cover border-2 border-green-600"
                     />
                     <div>
                       <div className="font-semibold text-gray-900 text-base truncate max-w-[120px]">
-                        {user.name || 'Utilisateur'}
+                        {getUserDisplayName()}
                       </div>
                       {user.role && (
                         <span className="inline-block mt-0.5 px-2 py-0.5 text-xs font-semibold rounded bg-green-100 text-green-700">
