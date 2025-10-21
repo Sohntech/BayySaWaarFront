@@ -11,7 +11,7 @@ const TestimonialSlider = () => {
       name: 'Fatou Diop',
       role: 'PDG, Senegal Exportations',
       company: 'Fabrication de textiles',
-      content: 'BAY SA WAAR a transformé  notre entreprise. Grâce  leur plateforme FIPA, nous avons établi des partenariats dans 15 pays et avons augmenté notre revenu de 300%.',
+      content: 'BAY SA WARR a transformé  notre entreprise. Grâce  leur plateforme FIPA, nous avons établi des partenariats dans 15 pays et avons augmenté notre revenu de 300%.',
       rating: 5,
       image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=300',
       location: 'Dakar, Sénégal'
@@ -31,7 +31,7 @@ const TestimonialSlider = () => {
       name: 'Amina Hassan',
       role: 'Directrice, Spices de l\'Est africain',
       company: 'Alimentation et boissons',
-      content: 'Service professionnel, solutions innovantes et engagement sinc re en faveur de la croissance des entreprises africaines. BAY SA WAAR est vraiment exceptionnel.',
+      content: 'Service professionnel, solutions innovantes et engagement sinc re en faveur de la croissance des entreprises africaines. BAY SA WARR est vraiment exceptionnel.',
       rating: 5,
       image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=300',
       location: 'Nairobi, Kenya'

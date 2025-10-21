@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Login from './pages/Login';
+import FabiraTrading from './pages/FabiraTrading';
 import ScrollToTop from './components/ScrollToTop';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -34,6 +35,7 @@ const AppContent = () => {
             </ProtectedRoute>
           } />
           <Route path="/platforms" element={<Platforms />} />
+          <Route path="/fabira-trading" element={<FabiraTrading />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />

@@ -79,7 +79,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
                     {product.images && product.images.length > 0 ? (
                       <img
                         src={product.images[0].url}
-                        alt={product.images[0].alt}
+                        alt={product.images[0].alt || product.name}
                         className="w-full h-full object-cover"
                       />
                     ) : (

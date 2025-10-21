@@ -226,7 +226,7 @@ const Dashboard = () => {
                 <div className="flex items-center space-x-2">
                   <TrendingUp className="w-4 h-4" />
                   <span>Tableau de Bord</span>
-                </div>
+          </div>
               </button>
               <button
                 onClick={() => setActiveTab('profile')}
@@ -241,7 +241,7 @@ const Dashboard = () => {
                   <span>Mon Profil</span>
                 </div>
               </button>
-            </nav>
+          </nav>
           </div>
         </div>
 
@@ -250,9 +250,9 @@ const Dashboard = () => {
           <>
             {/* Stats Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
-                  <motion.div
+            <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="bg-white/60 backdrop-blur-xl rounded-2xl p-4 sm:p-6 border border-white/30 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
           >
@@ -298,7 +298,7 @@ const Dashboard = () => {
                 <p className="text-sm font-medium text-gray-600 mb-1">Approuvés</p>
                 <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.approvedEnrollments}</p>
                     </div>
-                  </div>
+                      </div>
           </motion.div>
 
           <motion.div
@@ -314,7 +314,7 @@ const Dashboard = () => {
               <div className="flex-1">
                 <p className="text-sm font-medium text-gray-600 mb-1">Rôle</p>
                 <p className="text-lg sm:text-2xl font-bold text-gray-900 capitalize">{user?.role}</p>
-              </div>
+                </div>
               </div>
             </motion.div>
         </div>
@@ -369,7 +369,7 @@ const Dashboard = () => {
                       <div className="flex-shrink-0">
                         <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium ${getStatusColor(enrollment.status)}`}>
                           {getStatusText(enrollment.status)}
-                        </span>
+                    </span>
                       </div>
                     </div>
                   </motion.div>
@@ -379,13 +379,13 @@ const Dashboard = () => {
               </div>
             </motion.div>
           </>
-        )}
+          )}
 
         {/* Onglet Profil */}
-        {activeTab === 'profile' && (
-          <motion.div
+          {activeTab === 'profile' && (
+            <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
             className="bg-white/70 backdrop-blur-xl rounded-2xl border border-white/30 shadow-xl"
           >
             <div className="px-4 sm:px-6 py-4 sm:py-6 border-b border-white/20">
@@ -432,7 +432,7 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  <div>
+                    <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                     <div className="bg-white/60 backdrop-blur-sm rounded-lg p-3 border border-white/40">
                       <p className="text-gray-900">{user?.email || 'Non renseigné'}</p>
@@ -475,9 +475,9 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        )}
+              </div>
+            </motion.div>
+          )}
       </div>
     </div>
   );

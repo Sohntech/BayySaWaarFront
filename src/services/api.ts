@@ -2,7 +2,9 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: import.meta.env.DEV ? '/api' : 'https://bayysawaarback-production.up.railway.app/api',
+  baseURL: import.meta.env.DEV
+    ? 'http://localhost:5005/api'
+    : 'https://bayysawaarback-production.up.railway.app/api',
   timeout: 60000, // 60 secondes pour les uploads
   headers: {
     'Content-Type': 'application/json',
